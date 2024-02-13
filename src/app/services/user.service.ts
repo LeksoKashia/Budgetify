@@ -18,6 +18,13 @@ export class UserService {
     return this.http.get<User>(`${this.apiServerUrl}/user/find/${email}`);
   }
 
+  public addUser(user: User): Observable<User> {
+    return this.http.post<User>(
+      `${this.apiServerUrl}/user/add`,
+      user
+    );
+  }
+
   setUser(user: User) {
     this.store.dispatch(UserActions.setUser({ user }));
   }
