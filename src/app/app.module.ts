@@ -15,6 +15,8 @@ import { StoreModule } from '@ngrx/store';
 import { authReducer } from './redux/reducers/auth.reducer';
 import { userReducer } from './redux/reducers/user.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { RegistrationComponent } from './components/registration/registration.component';
+
 
 
 @NgModule({
@@ -24,7 +26,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     HomeComponent,
     HeaderComponent,
     AccountsComponent,
-    UserActionsComponent
+    UserActionsComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
