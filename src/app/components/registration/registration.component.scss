@@ -1,0 +1,99 @@
+.registration {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.registration .pig {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  z-index: -1;
+}
+
+.registration .budgetify {
+  font-family: "Alata", sans-serif;
+  margin-bottom: 30px;
+  font-size: 40px;
+}
+
+.registration-form {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 30px 50px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 30%;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.registration .form-group {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.registration .validation {
+  position: absolute;
+  bottom: -15px;
+  left: 3px;
+}
+
+.registration input {
+  width: 100%;
+  padding: 0px 10px;
+  margin-bottom: 7px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  border: 1px solid black;
+  height: 55px;
+  box-sizing: border-box;
+  font-size: 18px;
+  color: rgba(71, 71, 71, 1);
+}
+
+.registration .eye-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.registration .validation-wrap {
+  height: 20px;
+  margin-bottom: 5px;
+}
+
+.registration .error-message {
+  color: red;
+  font-weight: 700;
+}
+
+.registration button {
+  background-color: rgba(185, 226, 230, 1);
+  color: rgba(55, 55, 55, 1);
+  padding: 17px;
+  border-radius: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+.registration button:disabled {
+  background-color: rgba(185, 226, 230, 1);
+  cursor: not-allowed;
+}
+
+.login{
+  margin-top: 30px;
+}
+.login a{
+  text-decoration: none;
+}
