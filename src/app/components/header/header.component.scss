@@ -1,11 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Alata&family=Space+Grotesk:wght@300..700&display=swap');
 header{
-  padding: 50px 35px 15px 35px;
+  padding: 50px 35px;
 }
 nav{
   width: 100%;
   display: flex;
-  gap: 30px;
+  gap: 100px;
 }
 
 
@@ -24,7 +23,6 @@ nav{
 
 .user{
   width: 20%;
-  position: relative;
 }
 
 a{
@@ -42,17 +40,17 @@ a{
 
 .logout-delete, .confirmation {
   position: absolute;
-  bottom: -200px;
-  padding: 30px;
+  top: 0;
+  right: 0;
+  padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
-  border-radius: 12px;
   background-color: rgba(0, 0, 0, 0.329);
   backdrop-filter: blur(5px); 
   width: 270px;
-  height: 205px;
+  height: 150px;
 }
 
 .confirmation{
@@ -63,4 +61,19 @@ a{
   text-transform: capitalize;
   color: white;
   margin: 0;
+}
+
+.btn-danger{
+  margin-right: 7px;
+}
+
+.user{
+  text-align: right;
+}
+
+.close-overlay{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
 }

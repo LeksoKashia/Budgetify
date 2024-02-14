@@ -12,9 +12,9 @@
     </div>
 
     <div class="user" *ngIf="user$ | async as user">
-      <a (click)="show()">
+      <a (click)="show()" class="username">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="23"
-          viewBox="0 0 22 23" fill="none">
+          viewBox="0 0 22 23">
           <rect y="0.429565" width="22" height="22" fill="url(#pattern0)" />
           <defs>
             <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
@@ -26,8 +26,11 @@
         </svg>
         {{user.name}}
       </a>
-      
+
       <div *ngIf="showLogout" class="logout-delete">
+        <a (click)="show()"class="close-overlay">
+          <img src="../../../assets/close.png" alt="" width="25px" height="25px">
+        </a>
         <button class="btn btn-danger" (click)="logout()">Logout</button>
         <button class="btn btn-danger" (click)="showConfirmation()">Delete user</button>
       </div>
@@ -36,7 +39,7 @@
         <p class="confirmation-text">you sure you want to delete ?</p>
         <div>
           <button class="btn btn-danger" (click)="delete(user.id)">Yes</button>
-          <button class="btn btn-secondary" (click)="close()">No</button> 
+          <button class="btn btn-secondary" (click)="close()">No</button>
         </div>
       </div>
 
