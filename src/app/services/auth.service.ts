@@ -17,7 +17,6 @@ export class AuthService {
   login() {
     // this.store.dispatch(AuthActions.login());
     this.saveAuthStateToLocalStorage(true);
-    
   }
 
   logout() {

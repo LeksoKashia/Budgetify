@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { Observable, map, of } from 'rxjs';
-
 import { AuthService } from '../services/auth.service';
 import { AuthState } from 'src/app/redux/reducers/auth.reducer';
 import { isLoggedIn } from '../redux/selectors/auth.selectors'; 
 import { Store } from '@ngrx/store';
-
-
 
 @Injectable({
   providedIn: 'root'
