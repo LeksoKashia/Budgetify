@@ -26,11 +26,11 @@ export class HeaderComponent implements OnInit {
     this.showLogout = !this.showLogout;
   }
 
-  showConfirmation(){
+  showConfirmation() {
     this.showConfirmationModal = !this.showConfirmationModal;
   }
 
-  close(){
+  close() {
     this.showLogout = false;
     this.showConfirmationModal = false;
   }
