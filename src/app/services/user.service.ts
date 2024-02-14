@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { User } from '../models/User.model';
 import { Store } from '@ngrx/store';
 import { UserState } from '../redux/reducers/user.reducer';
@@ -25,12 +25,23 @@ export class UserService {
     );
   }
 
-  setUser(user: User) {
-    this.store.dispatch(UserActions.setUser({ user }));
+  public deleteUser(userId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiServerUrl}/user/delete/${userId}`);
   }
 
-  getUserInfo() {
-    this.store.dispatch(UserActions.getUserInfo());
+  setUser(user: User) {
+    // this.store.dispatch(UserActions.setUser({ user }));
+    localStorage.setItem('user', JSON.stringify(user));
   }
+
+  // getUserInfo() {
+  //   this.store.dispatch(UserActions.getUserInfo());
+  // }
+
+  getUserInfoFromLocalStorage(): Observable<User> {
+    const userInfo = localStorage.getItem('user');
+    return of(userInfo ? JSON.parse(userInfo) : null);
+  }
+  
 
 }

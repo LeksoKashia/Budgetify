@@ -19,10 +19,12 @@ nav{
   gap: 30px;
   justify-content:space-between;
   align-items: center;
+  position: relative;
 }
 
 .user{
-  width: 20%
+  width: 20%;
+  position: relative;
 }
 
 a{
@@ -35,4 +37,30 @@ a{
 
 .user a:hover{
   color: red;
+}
+
+
+.logout-delete, .confirmation {
+  position: absolute;
+  bottom: -200px;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 12px;
+  background-color: rgba(0, 0, 0, 0.329);
+  backdrop-filter: blur(5px); 
+  width: 270px;
+  height: 205px;
+}
+
+.confirmation{
+  flex-direction: column;
+}
+
+.confirmation-text{
+  text-transform: capitalize;
+  color: white;
+  margin: 0;
 }
