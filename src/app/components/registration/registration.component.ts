@@ -9,16 +9,15 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent{
-  registrationForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) {
-    this.registrationForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
-      confirmPassword: ['', Validators.required]
-    });
-  }
+  registrationForm : FormGroup = this.formBuilder.group({
+    name: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required],
+    confirmPassword: ['', Validators.required]
+  });
+
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) {}
 
   onSubmit() {
     if (this.registrationForm.valid && !this.passwordsDoNotMatch()) {
