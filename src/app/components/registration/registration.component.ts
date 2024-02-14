@@ -34,7 +34,6 @@ export class RegistrationComponent{
         },
         (error) => {
           console.error('Error registering user:', error);
-
         }
       );
     }

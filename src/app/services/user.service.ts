@@ -42,6 +42,5 @@ export class UserService {
     const userInfo = localStorage.getItem('user');
     return of(userInfo ? JSON.parse(userInfo) : null);
   }
-  
 
 }
