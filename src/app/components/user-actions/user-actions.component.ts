@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./user-actions.component.scss']
 })
 export class UserActionsComponent {
+  showOverlay: boolean = false;
 
+  toggleOverlay() {
+    this.showOverlay = !this.showOverlay;
+  }
 }
