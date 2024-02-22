@@ -1,0 +1,30 @@
+<form [formGroup]="accountForm" (ngSubmit)="onSubmit()" class="custom-form">
+  <div class="form-div">
+    <div class="form-group">
+      <label for="title" class="input-label">Title:</label>
+      <input type="text" id="title" formControlName="title" class="custom-input" placeholder="Enter title">
+    </div>
+
+    <div class="form-group">
+      <label for="balance" class="input-label">Balance:</label>
+      <input type="number" id="balance" formControlName="balance" class="custom-input" placeholder="Enter balance">
+    </div>
+
+    <div class="form-group">
+      <label for="currency" class="input-label">Currency:</label>
+      <select id="currency" formControlName="currency" class="custom-input">
+        <option *ngFor="let currency of currencies" [value]="currency">{{ currency }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="description" class="input-label">Description:</label>
+      <input id="description" formControlName="description" class="custom-input" placeholder="Enter description">
+    </div>
+  </div>
+
+  <div class="buttons">
+    <button type="button" class="btn-secondary" (click)="close()">Cancel</button>
+    <button type="submit" [disabled]="!accountForm.valid" class="btn btn-primary">Save</button>
+  </div>
+</form>
