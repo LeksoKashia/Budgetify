@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { User } from 'src/app/models/User.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
-import { selectUser } from '../../redux/selectors/user.selectors';
 
 @Component({
   selector: 'app-header',
@@ -12,14 +9,14 @@ import { selectUser } from '../../redux/selectors/user.selectors';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  user$: Observable<User>;
+  user: User;
   showLogout: boolean = false;
   showConfirmationModal: boolean = false;
 
   constructor(private authService: AuthService, private userService: UserService) {}
 
   ngOnInit(): void {
-    this.user$ = this.userService.getUserInfoFromLocalStorage();
+    this.user = this.userService.getUserInfoFromLocalStorage();
   }
 
   show() {

@@ -8,10 +8,10 @@
       <a routerLink="/">Subscriptions</a>
       <a routerLink="/">Obligatory</a>
       <a routerLink="/">Statistic</a>
-      <a routerLink="/">Admin</a>
+      <a routerLink="/admin">Admin</a>
     </div>
 
-    <div class="user" *ngIf="user$ | async as user">
+    <div class="user" *ngIf="user">
       <a (click)="show()" class="username">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="23"
           viewBox="0 0 22 23">
@@ -28,7 +28,7 @@
       </a>
 
       <div *ngIf="showLogout" class="logout-delete">
-        <a (click)="show()"class="close-overlay">
+        <a (click)="show()" class="close-overlay">
           <img src="../../../assets/close.png" alt="" width="25px" height="25px">
         </a>
         <button class="btn btn-danger" (click)="logout()">Logout</button>
