@@ -1,1 +1,33 @@
-<p>accounts works!</p>
+<section class="main">
+  <h2 *ngIf="accounts.length == 0" class="noacc">
+    No Accounts <i class="fa-regular fa-credit-card"></i>
+  </h2>
+  <div *ngFor="let account of accounts">
+    <div class="account" (click)="toggleOverlay(account)">
+      <img class="accountbg" src="../../../assets/accountbg.png" alt="">
+      <div class="info-account">
+        <h4 class="title-account">{{ account.title }}</h4>
+        <h1 class="balance-account">{{ account.balance | number }}</h1>
+      </div>
+      <div class="currency">
+        <img [src]="'../../../assets/'+account.currency+'.png'" width="25" height="35">
+      </div>
+    </div>
+
+    <div *ngIf="showOverlay" class="left-overlay" (click)="toggleOverlay(account)"></div>
+    <div *ngIf="showOverlay" class="right-overlay">
+      <div class="head-overlay">
+        <h1 class="title-overlay">Account Information</h1>
+        <div class="actions">
+          <i class="fa-solid fa-trash" (click)="delete(selectedAccount.id)"></i>
+          <i class="fa-solid fa-pen" (click)="showEdit()"></i>
+          <i class="fa-solid fa-x" (click)="toggleOverlay(account)"></i>
+        </div>
+      </div>
+      <app-account-info *ngIf="!showEditLayout" [accountInfo]="selectedAccount"></app-account-info>
+      <app-account-edit *ngIf="showEditLayout" [accountInfo]="selectedAccount"
+        (closeForm)="toggleOverlay()"></app-account-edit>
+      <button class="btn btn-secondary" *ngIf="!showEditLayout" (click)="toggleOverlay()">Close</button>
+    </div>
+  </div>
+</section>

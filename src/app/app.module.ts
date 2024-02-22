@@ -14,6 +14,14 @@ import { authReducer } from './redux/reducers/auth.reducer';
 import { userReducer } from './redux/reducers/user.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { AccountAddComponent } from './components/forms/add/account-add/account-add.component';
+import { TransactionAddComponent } from './components/forms/add/transaction-add/transaction-add.component';
+import { PiggyBankAddComponent } from './components/forms/add/piggy-bank-add/piggy-bank-add.component';
+import { AccountInfoComponent } from './components/forms/info/account-info/account-info.component';
+import { AccountEditComponent } from './components/forms/edit/account-edit/account-edit.component';
+import { TransactionEditComponent } from './components/forms/edit/transaction-edit/transaction-edit.component';
+import { TransactionInfoComponent } from './components/forms/info/transaction-info/transaction-info.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 
 @NgModule({
@@ -24,7 +32,15 @@ import { RegistrationComponent } from './components/registration/registration.co
     HeaderComponent,
     AccountsComponent,
     UserActionsComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    AccountAddComponent,
+    TransactionAddComponent,
+    PiggyBankAddComponent,
+    AccountInfoComponent,
+    AccountEditComponent,
+    TransactionEditComponent,
+    TransactionInfoComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
