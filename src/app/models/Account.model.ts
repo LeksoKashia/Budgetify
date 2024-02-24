@@ -8,5 +8,4 @@ export interface Account {
   balance: number;
   description: string;
   isActive?: boolean; 
-
 }

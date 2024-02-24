@@ -6,14 +6,12 @@ import { AuthGuard } from './guard/authguard.guard';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { AdminComponent } from './components/admin/admin.component';
 
-
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent }
-  
 ];
 
 @NgModule({

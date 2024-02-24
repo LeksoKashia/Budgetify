@@ -9,8 +9,13 @@ import { filter } from 'rxjs';
   styleUrls: ['./user-actions.component.scss']
 })
 export class UserActionsComponent implements OnInit{
+
   showOverlay: boolean = false;
   formDisplayText : string;
+  showAccountAdd: boolean = false;
+  showTransactionAdd: boolean = false;
+  showPiggyBankAdd: boolean = false;
+
 
   constructor(private router: Router,  private activatedRoute: ActivatedRoute) { }
   ngOnInit(): void {
@@ -22,32 +27,13 @@ export class UserActionsComponent implements OnInit{
     // });
   }
 
-  showAccountAdd: boolean = false;
-  showTransactionAdd: boolean = false;
-  showPiggyBankAdd: boolean = false;
-  toggleOverlay(formName?: string) {
-    this.showOverlay = !this.showOverlay;
-    this.formDisplayText = formName;
-    switch (formName) {
-      case "Account":
-        this.showAccountAdd = true;
-        this.showTransactionAdd = false;
-        this.showPiggyBankAdd = false;
-        break;
-      case "Transaction":
-        this.showTransactionAdd = true;
-        this.showAccountAdd = false;
-        this.showPiggyBankAdd = false;
-      break;
-      case "Piggy Bank":
-        this.showPiggyBankAdd = true;
-        this.showTransactionAdd = false;
-        this.showAccountAdd = false;
-      break;
-    
-      default:
-        break;
-    }
+ toggleOverlay(formName?: string) {
+  this.showOverlay = !this.showOverlay;
+  this.formDisplayText = formName;
 
-  }
+  this.showAccountAdd = formName === "Account";
+  this.showTransactionAdd = formName === "Transaction";
+  this.showPiggyBankAdd = formName === "Piggy Bank";
+ }
+
 }
