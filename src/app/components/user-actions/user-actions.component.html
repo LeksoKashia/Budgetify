@@ -56,11 +56,11 @@
         </div>
 
         <div *ngIf="showTransactionAdd">
-          <app-transaction-add></app-transaction-add>
+          <app-transaction-add (closeForm)="toggleOverlay()"></app-transaction-add>
         </div>
 
         <div *ngIf="showPiggyBankAdd">
-          <app-piggy-bank-add></app-piggy-bank-add>
+          <app-piggy-bank-add (closeForm)="toggleOverlay()"></app-piggy-bank-add>
         </div>
 
 
@@ -78,7 +78,55 @@
       <p class="type-text">Add Piggy Bank</p>
     </div>
 
-  </div>
+    <div *ngFor="let i of piggyBanks" class="type type-add piggyBank">
+      <a class="arrow add">
+        <img src="../../../assets/pig.png" alt="" height="25" width="45">
+      </a>
+      <div class="kaito">
+        <div class="pigs">
+          <div>
+            <p class="piggy-text">{{i.goal}}</p>
+            <small>{{i.savedAmount}}/{{i.goalAmount}} {{activeCard.currency.slice(5,6)}}</small>
+          </div>
+          <div>
+            <a class="arrow add pig-add" (click)="togglePiggy(i)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <path d="M7.38 17.4533V10.4933H0.5V7.61334H7.38V0.653345H10.42V7.61334H17.3V10.4933H10.42V17.4533H7.38Z"
+                  fill="rgba(255, 118, 174, 1)" />
+              </svg>
+            </a>
+          </div>
+        </div>
+        <input type="range" class="styled-range" min="0" [max]="i.goalAmount" [value]="i.savedAmount"
+          [style.background]="getRangeBackground(i.savedAmount, i.goalAmount )" />
+      </div>
 
+      <div *ngIf="showPiggy" class="secondary-left-overlay" (click)="togglePiggy(i)"></div>
+      <div *ngIf="showPiggy" class="secondary-right-overlay">
+        <div class="secondary-head-overlay">
+          <h1 class="secondary-title-overlay">Piggy Bank Information</h1>
+          <div class="secondary-actions">
+            <i class="fa-solid fa-pen" (click)="togglePiggy(i, 'edit')"></i>
+            <a class="arrow add pig-add piggiko" (click)="addToPiggy(i)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <path d="M7.38 17.4533V10.4933H0.5V7.61334H7.38V0.653345H10.42V7.61334H17.3V10.4933H10.42V17.4533H7.38Z"
+                  fill="rgba(255, 118, 174, 1)" />
+              </svg>
+            </a>
+            <i class="fa-solid fa-x" (click)="togglePiggy()"></i>
+          </div>
+        </div>
+        <app-piggy-bank-info *ngIf="!editPiggyLayout && !addMoneyToPiggy" (reInitialise)="reInitialise()" [piggyBankInfo]="selectedPiggy"
+          (closeForm)="togglePiggy()"></app-piggy-bank-info>
+        <app-piggy-bank-edit *ngIf="editPiggyLayout" [piggyInfo]="selectedPiggy"
+          (closeForm)="togglePiggy()"></app-piggy-bank-edit>
+        <app-add-money-to-piggy (closeForm)="togglePiggy()" (reInitialise)="reInitialise()" *ngIf="addMoneyToPiggy"
+          [piggyInfo]="selectedPiggy"></app-add-money-to-piggy>
+        <button *ngIf="!editPiggyLayout && !addMoneyToPiggy" class="btn btn-secondary"
+          (click)="togglePiggy(i)">Close</button>
+      </div>
+    </div>
+
+  </div>
 
 </section>

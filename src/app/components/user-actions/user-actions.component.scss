@@ -7,10 +7,16 @@
   overflow-y: auto;
 }
 
+.main::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
 .actions{
   display: flex;
   flex-direction: column;
   gap: 15px;
+  margin-bottom: 50px;
 }
 
 .type{
@@ -56,4 +62,87 @@
   font-family: "Space Grotesk", sans-serif;
 }
 
+.piggy{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.piggyBank{
+  background-color: rgba(254, 206, 226, 1);
+}
 
+.piggy-text{
+  margin: 0;
+  font-size: 16px;
+  height: 17px;
+  font-weight: 600;
+}
+
+.styled-range {
+  margin: 0;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 5px;
+  background: rgba(255, 118, 174, 1);
+  outline: none;
+  pointer-events: none;
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 6px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+  }
+  &::-moz-range-thumb {
+    width: 10px;
+    height: 6px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+  }
+}
+
+.styled-range::-webkit-slider-thumb {
+  display: none;
+}
+
+.styled-range::-moz-range-thumb {
+  display: none;
+}
+
+.kaito{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.pig-add{
+  top: -3px;
+  right: 0;
+}
+
+.pigs{
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
+.btn-secondary{
+  position: absolute;
+  bottom: 30px;
+  right: 25px;
+  background-color: transparent;
+  color: rgba(55, 55, 55, 1);
+  border: none;
+}
+
+.piggiko{
+  border: 2px solid rgba(255, 118, 174, 1);
+  background-color: #ffffff00;
+  height: unset;
+  padding: 5px;
+}
