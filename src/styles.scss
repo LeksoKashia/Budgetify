@@ -26,7 +26,7 @@ body{
 }
 
 
-.left-overlay {
+.left-overlay, .secondary-left-overlay {
 
   position: absolute;
   top: 0;
@@ -37,7 +37,7 @@ body{
 
 }
 
-.right-overlay {
+.right-overlay, .secondary-right-overlay {
   position: absolute;
   top: 0;
   right: 0;
@@ -46,13 +46,13 @@ body{
   width: 35%;
 }
 
-.overlay-content{
+.overlay-content, .secondary-overlay-content{
   position: relative;
   width: 100%;
   height: 100vh;
 }
 
-.head-overlay{
+.head-overlay, .secondary-head-overlay{
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -60,7 +60,7 @@ body{
 
 }
 
-.title-overlay{
+.title-overlay, .secondary-title-overlay{
   color: rgba(55, 55, 55, 1);
   font-family: "Space Grotesk", sans-serif;
   font-weight: 400;
@@ -70,4 +70,57 @@ body{
 
 .close-overlay{
   cursor: pointer;
+}
+
+.secondary-actions{
+  display: flex;
+  gap: 10px;
+}
+
+.secondary-actions i{
+  font-size: 22px;
+  color: rgba(55, 55, 55, 1);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.secondary-actions .fa-trash:hover{
+  color: #dc3545;
+}
+
+.secondary-actions .fa-pen:hover{
+  color: #007bff;
+}
+
+.secondary-actions .fa-x:hover{
+  color: grey;
+}
+
+.search-container{
+  display: flex;
+}
+
+.search{
+  width: 100%;
+  background-color: rgba(249, 249, 249, 1);
+  padding: 15px 10px;
+  border-radius: 0 10px 10px 0;
+  outline: none;
+  border: none;
+  color: rgba(71, 71, 71, 1);
+}
+
+.icon-search{
+  background-color: rgba(249, 249, 249, 1);
+  padding: 15px 10px;
+  border-radius: 10px 0 0 10px;
+  outline: none;
+  border: none;
+}
+
+.fa-magnifying-glass{
+  font-size: large;
+  color: rgba(71, 71, 71, 1);
 }
