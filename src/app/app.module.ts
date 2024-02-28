@@ -22,6 +22,11 @@ import { AccountEditComponent } from './components/forms/edit/account-edit/accou
 import { TransactionEditComponent } from './components/forms/edit/transaction-edit/transaction-edit.component';
 import { TransactionInfoComponent } from './components/forms/info/transaction-info/transaction-info.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { PiggyBankInfoComponent } from './components/forms/info/piggy-bank-info/piggy-bank-info.component';
+import { PiggyBankEditComponent } from './components/forms/edit/piggy-bank-edit/piggy-bank-edit.component';
+import { AddMoneyToPiggyComponent } from './components/forms/add/add-money-to-piggy/add-money-to-piggy.component';
+import { SubscriptionsComponent } from './components/subscriptions/subscriptions.component';
+import { ObligatoryComponent } from './components/obligatory/obligatory.component';
 
 
 @NgModule({
@@ -40,7 +45,12 @@ import { AdminComponent } from './components/admin/admin.component';
     AccountEditComponent,
     TransactionEditComponent,
     TransactionInfoComponent,
-    AdminComponent
+    AdminComponent,
+    PiggyBankInfoComponent,
+    PiggyBankEditComponent,
+    AddMoneyToPiggyComponent,
+    SubscriptionsComponent,
+    ObligatoryComponent
   ],
   imports: [
     BrowserModule,
