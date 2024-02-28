@@ -34,6 +34,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+    localStorage.removeItem('activeCard');
   }
 
   delete(userId: number): void {

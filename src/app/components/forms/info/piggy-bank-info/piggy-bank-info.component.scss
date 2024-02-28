@@ -1,0 +1,42 @@
+.pig-styled-range {
+  height: 12px !important;
+  &::-webkit-slider-thumb {
+    height: 12px !important;
+  }
+  &::-moz-range-thumb {
+   height: 12px !important;
+  }
+}
+
+.arrow{
+  width:35px;
+  height:35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.add{
+  background-color: white;
+  cursor: pointer;
+}
+
+button{
+  background-color: rgba(254, 206, 226, 1);
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 0;
+  outline: 0;
+  border-radius: 10px;
+  padding: 5px 12px;
+  font-weight: 700;
+}
+
+.last-block{
+  border: none !important;
+}

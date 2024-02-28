@@ -1,0 +1,24 @@
+<div class="info">
+  <p style="margin: 0;">{{piggyBankInfo.savedAmount}}/{{piggyBankInfo.goalAmount}} {{activeCard.currency.slice(5,6)}}
+  </p>
+  <input type="range" class="styled-range pig-styled-range" min="0" [max]="piggyBankInfo.goalAmount"
+    [value]="piggyBankInfo.savedAmount"
+    [style.background]="getRangeBackground(piggyBankInfo.savedAmount, piggyBankInfo.goalAmount )" />
+  <div class="block-info">
+    <h3>Goal:</h3>
+    <p>{{piggyBankInfo.goal}}</p>
+  </div>
+  <div class="block-info">
+    <h3>Goal Amount:</h3>
+    <p>{{piggyBankInfo.goalAmount}}</p>
+  </div>
+  <div class="block-info last-block">
+    <h3>Saved Amount:</h3>
+    <p>{{piggyBankInfo.savedAmount}}</p>
+  </div>
+
+  <button (click)="crashPiggy()"> 
+    <a class="arrow add">
+      <img src="../../../assets/pig.png" alt="" height="25" width="45">
+    </a>Crash</button>
+</div>
