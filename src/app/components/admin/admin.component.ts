@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Account } from 'src/app/models/Account.model';
@@ -10,7 +11,6 @@ import { PaymentsService } from 'src/app/services/payments.service';
 })
 export class AdminComponent implements OnInit {
   cards$: Observable<Account[]>;
-  activeCard: Account | null = null;
 
   constructor(private paymentsService: PaymentsService) { }
 
@@ -18,24 +18,30 @@ export class AdminComponent implements OnInit {
     this.cards$ = this.paymentsService.getAccounts();
     const storedCard = localStorage.getItem('activeCard');
     if (storedCard) {
-      this.activeCard = JSON.parse(storedCard);
-      this.activateCard(this.activeCard);
+      const activeCard = JSON.parse(storedCard);
+      this.cards$.subscribe(cards => {
+        const cardToUpdate = cards.find(card => card.id === activeCard.id);
+        if (cardToUpdate) {
+          cardToUpdate.isActive = true;
+        }
+      });
     }
   }
 
   toggleCard(card: Account): void {
-    this.activateCard(card);
-    localStorage.setItem('activeCard', JSON.stringify(card));
-  }
-
-  private activateCard(card: Account): void {
     this.cards$.subscribe(cards => {
       cards.forEach(c => {
-        if (c !== card) {
-          c.isActive = false;
+        if (c === card) {
+          c.isActive = !c.isActive;
+          if (!c.isActive) {
+            localStorage.removeItem('activeCard');
+          } else {
+            localStorage.setItem('activeCard', JSON.stringify(card));
+          }
+        } else {
+          c.isActive = false; 
         }
       });
-      card.isActive = !card.isActive;
     });
   }
 }

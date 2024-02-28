@@ -1,8 +1,27 @@
 <app-header></app-header>
+<section class="admin-section">
 
-<div *ngIf="cards$ | async as cards">
-  <div *ngFor="let card of cards">
-    <h1>{{card.title}}</h1>
-    <button (click)="toggleCard(card)">{{card.isActive ? 'Deactivate' : 'Activate'}}</button>
-  </div>
-</div>
+  <h1>Activate Card</h1>
+  <hr>
+
+  <table class="card-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="cards$ | async as cards">
+      <tr *ngFor="let card of cards">
+        <td class="title">{{ card.title }}</td>
+        <td>
+          <button (click)="toggleCard(card)" class="activation">
+            <span class="text" [ngClass]="{'red': card.isActive, 'green': !card.isActive}">
+              {{ card.isActive ? 'Deactivate' : 'Activate' }}
+            </span>
+          </button>          
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
