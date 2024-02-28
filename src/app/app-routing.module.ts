@@ -5,10 +5,14 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './guard/authguard.guard';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { SubscriptionsComponent } from './components/subscriptions/subscriptions.component';
+import { ObligatoryComponent } from './components/obligatory/obligatory.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'subscriptions', component: SubscriptionsComponent, canActivate: [AuthGuard] },
+  { path: 'obligatory', component: ObligatoryComponent, canActivate: [AuthGuard] },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent }
