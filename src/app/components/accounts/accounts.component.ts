@@ -15,26 +15,39 @@ export class AccountsComponent implements OnInit {
   showEditLayout: boolean = false;
   formDisplayText: string;
   selectedAccount: any;
+  activeCardId: any | null = null;
+
 
   constructor(private paymentsService: PaymentsService, private userService: UserService) {}
 
   ngOnInit() {
     this.getAccounts();
+    this.getActiveCard();
+  }
+  reFetchAccounts() {
+    setTimeout(() => {
+      this.getAccounts();
+    }, 200);
+ 
   }
 
   getAccounts() {
-    const user: User = this.userService.getUserInfoFromLocalStorage();
-    if (user && user.id) {
       this.paymentsService.getAccounts().subscribe(
         (accounts: Account[]) => {
-          this.accounts = accounts.filter(account => account.user.id === user.id);
+          this.accounts = accounts;
         },
         (error) => {
           console.error('Error fetching accounts:', error);
         }
       );
-    } else {
-      console.error('User information not found.');
+    
+  }
+
+  getActiveCard() {
+    const storedCard = localStorage.getItem('activeCard');
+    if (storedCard) {
+      const activeCard = JSON.parse(storedCard);
+      this.activeCardId = activeCard.id;
     }
   }
 
@@ -50,6 +63,13 @@ export class AccountsComponent implements OnInit {
   delete(accountId: number): void {
     this.paymentsService.deleteAccount(accountId).subscribe(
       () => {
+        if(this.activeCardId){
+          if(this.activeCardId == accountId){
+            localStorage.removeItem('activeCard'); 
+          }
+        }
+        console.log(accountId);
+        
         console.log(`Account with ID ${accountId} deleted successfully`);
         this.toggleOverlay();
       },

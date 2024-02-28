@@ -3,8 +3,13 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-
   overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.main::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 
 .account{
@@ -47,22 +52,6 @@
   background-color: white;
 }
 
-.actions{
-  display: flex;
-  gap: 10px;
-}
-
-.actions i{
-  font-size: 22px;
-  color: rgba(55, 55, 55, 1);
-  cursor: pointer;
-}
-
-.actions i:hover{
-  color: aquamarine;
-}
-
-
 .btn-secondary{
   position: absolute;
   bottom: 30px;
@@ -79,9 +68,23 @@
   border-radius: 12px;
 }
 
-i{
-  background: -webkit-linear-gradient(#eee, #333);
+.fa-credit-card{
+  background: -webkit-linear-gradient(#c23232, #330101);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-left: 7px;
+}
+
+.active{
+  opacity: 1 !important;
+}
+
+.accountbg {
+
+  -webkit-transition: all .2s ease-in-out;
+
+}
+
+.accountbg:hover {
+  -webkit-transform: scale(1.01);
 }
