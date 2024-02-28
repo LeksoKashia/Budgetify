@@ -1,5 +1,5 @@
 <app-header></app-header>
-<section style="display: flex; gap: 100px; padding: 0 35px;">
+<section style="display: flex; gap: 100px; padding: 0 35px 0 20px;">
 
   <div class="accounts">
     <app-accounts></app-accounts>
@@ -7,14 +7,19 @@
 
 
   <div class="main">
-    Home content
+    <div class="search-container">
+
+      <button class="icon-search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+      <input type="text" class="search" placeholder="Search">
+
+    </div>
   </div>
 
 
   <div class="user-actions">
-    <app-user-actions></app-user-actions>
+    <app-user-actions (reInitialiseAccount)="reInitialise()"></app-user-actions>
   </div>
-
-
 
 </section>
