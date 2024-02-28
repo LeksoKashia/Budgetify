@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Account } from '../models/Account.model';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { UserService } from './user.service'; // Import the UserService to fetch user from localStorage
+import { PiggyBank } from '../models/PiggyBank.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class PaymentsService {
   private accountsSubject: BehaviorSubject<Account[]> = new BehaviorSubject<Account[]>([]);
 
   constructor(private http: HttpClient, private userService: UserService) {}
+
 
   getAccounts(): BehaviorSubject<Account[]> {
     const user = this.userService.getUserInfoFromLocalStorage();
@@ -63,6 +65,12 @@ export class PaymentsService {
           this.updateAccounts(updatedAccounts);
         })
       );
+  }
+
+  getPiggyBanks(): Observable<PiggyBank[]> {
+    const storedCard = localStorage.getItem('activeCard');
+    const activeCard: Account= JSON.parse(storedCard);
+    return this.http.get<PiggyBank[]>(`${this.apiServerUrl}/payment/accounts/${activeCard.id}`)
   }
   
   updateAccounts(accounts: Account[]): void {
