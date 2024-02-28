@@ -1,0 +1,49 @@
+.actions{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 50px;
+}
+
+.type{
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background-color: rgba(249, 249, 249, 1);
+  width: 100%;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+.type-add{
+  background-color: rgba(185, 226, 230, 1);
+}
+
+.arrow{
+  width:35px;
+  height:35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrow-down{
+  background-color: rgba(33, 194, 6, 1);
+}
+
+.arrow-up{
+  background-color: rgba(238, 63, 25, 1);
+}
+
+.add{
+  background-color: white;
+  cursor: pointer;
+}
+
+.type-text{
+  font-size: 20px;
+  margin: 0;
+  color: rgba(55, 55, 55, 1);
+  font-family: "Space Grotesk", sans-serif;
+}
