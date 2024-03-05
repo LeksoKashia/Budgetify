@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./obligatory.component.scss', '../subscriptions/subscriptions.component.scss']
 })
 export class ObligatoryComponent {
+  showOverlay: boolean = false;
 
+  toggleOverlay(s?: string) {
+
+    this.showOverlay = !this.showOverlay;
+  }
 }

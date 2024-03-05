@@ -15,33 +15,55 @@
       <input type="text" class="search" placeholder="Search">
 
     </div>
+
+    <p style="margin-top: 7px; padding-left: 15px;color: rgba(71, 71, 71, 1);"><i class="fa-solid fa-filter"></i>
+      Creation Date</p>
+
+    <p style="padding-left: 3px;">No obligatories found.</p>
+
   </div>
 
 
   <div class="user-actions">
-      <div class="actions">
+    <div class="actions">
 
 
-        <div class="type type-add">
-          <a class="arrow add" >
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-              <path d="M7.38 17.4533V10.4933H0.5V7.61334H7.38V0.653345H10.42V7.61334H17.3V10.4933H10.42V17.4533H7.38Z"
-                fill="#86C9CF" />
-            </svg>
+      <div class="type type-add">
+        <a class="arrow add" (click)="toggleOverlay()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M7.38 17.4533V10.4933H0.5V7.61334H7.38V0.653345H10.42V7.61334H17.3V10.4933H10.42V17.4533H7.38Z"
+              fill="#86C9CF" />
+          </svg>
+        </a>
+        <p class="type-text">Add Obligatory</p>
+      </div>
+
+      <div class="type type-add">
+        <a class="arrow add">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M7.38 17.4533V10.4933H0.5V7.61334H7.38V0.653345H10.42V7.61334H17.3V10.4933H10.42V17.4533H7.38Z"
+              fill="#86C9CF" />
+          </svg>
+        </a>
+        <p class="type-text">Add Transaction</p>
+      </div>
+
+
+
+      <div *ngIf="showOverlay" class="left-overlay" (click)="toggleOverlay()"></div>
+      <div *ngIf="showOverlay" class="right-overlay">
+
+        <div class="head-overlay">
+          <h1 class="title-overlay">Add Obligatory </h1>
+          <a (click)="toggleOverlay()" class="close-overlay">
+            <img src="../../../assets/close.png" alt="" width="30px" height="30px">
           </a>
-          <p class="type-text">Add Transaction</p>
         </div>
 
+        <app-subscription-add (closeForm)="toggleOverlay('kaito')"></app-subscription-add>
 
-        <div class="type type-add">
-          <a class="arrow add" >
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-              <path d="M7.38 17.4533V10.4933H0.5V7.61334H7.38V0.653345H10.42V7.61334H17.3V10.4933H10.42V17.4533H7.38Z"
-                fill="#86C9CF" />
-            </svg>
-          </a>
-          <p class="type-text">Add Obligatory</p>
-        </div>
+      </div>
+
 
     </div>
   </div>
