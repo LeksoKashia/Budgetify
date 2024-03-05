@@ -51,7 +51,6 @@ export class PiggyBankInfoComponent implements OnInit{
             (response) => {
               this.reInitialise.emit();
               console.log('Account updated successfully:', response);
-
             },
             (error) => {
               console.error('Failed to update account:', error);

@@ -27,7 +27,7 @@ import { PiggyBankEditComponent } from './components/forms/edit/piggy-bank-edit/
 import { AddMoneyToPiggyComponent } from './components/forms/add/add-money-to-piggy/add-money-to-piggy.component';
 import { SubscriptionsComponent } from './components/subscriptions/subscriptions.component';
 import { ObligatoryComponent } from './components/obligatory/obligatory.component';
-
+import { SubscriptionAddComponent } from './components/forms/add/subscription-add/subscription-add.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +50,8 @@ import { ObligatoryComponent } from './components/obligatory/obligatory.componen
     PiggyBankEditComponent,
     AddMoneyToPiggyComponent,
     SubscriptionsComponent,
-    ObligatoryComponent
+    ObligatoryComponent,
+    SubscriptionAddComponent
   ],
   imports: [
     BrowserModule,

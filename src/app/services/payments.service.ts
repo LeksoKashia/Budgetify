@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Account } from '../models/Account.model';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, tap } from 'rxjs';
 import { UserService } from './user.service'; // Import the UserService to fetch user from localStorage
 import { PiggyBank } from '../models/PiggyBank.model';
 
@@ -13,7 +13,6 @@ export class PaymentsService {
   private accountsSubject: BehaviorSubject<Account[]> = new BehaviorSubject<Account[]>([]);
 
   constructor(private http: HttpClient, private userService: UserService) {}
-
 
   getAccounts(): BehaviorSubject<Account[]> {
     const user = this.userService.getUserInfoFromLocalStorage();
@@ -71,6 +70,12 @@ export class PaymentsService {
     const storedCard = localStorage.getItem('activeCard');
     const activeCard: Account= JSON.parse(storedCard);
     return this.http.get<PiggyBank[]>(`${this.apiServerUrl}/payment/accounts/${activeCard.id}`)
+  }
+
+  getSubscriptions(): Observable<Subscription[]> {
+    const storedCard = localStorage.getItem('activeCard');
+    const activeCard: Account= JSON.parse(storedCard);
+    return this.http.get<Subscription[]>(`${this.apiServerUrl}/payment/accounts/subscriptions/${activeCard.id}`)
   }
   
   updateAccounts(accounts: Account[]): void {

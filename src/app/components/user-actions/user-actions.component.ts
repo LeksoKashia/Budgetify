@@ -47,9 +47,7 @@ export class UserActionsComponent implements OnInit{
   }
 
   toggleOverlay(formName?: string) {
-    setTimeout(() => {
-      this.getPiggyBanks();
-    }, 200);
+    this.getPiggyBanks();
    
     this.showOverlay = !this.showOverlay;
     this.formDisplayText = formName;
@@ -59,33 +57,28 @@ export class UserActionsComponent implements OnInit{
     this.showPiggyBankAdd = formName === "Piggy Bank";
   }
 
-  togglePiggy(piggy?: any, component?: string) : number{
-    this.editPiggyLayout = false;
-    this.addMoneyToPiggy = false;
-    if (piggy) {
-      this.selectedPiggy = piggy;
+  togglePiggy(piggy?: any, component?: string): number {
+    if (component === 'info') {
+        this.editPiggyLayout = false;
+        this.addMoneyToPiggy = false;
+        return 0;
+    } else if (component === 'edit') {
+        this.editPiggyLayout = true;
+        this.addMoneyToPiggy = false;
+        this.selectedPiggy = piggy;
+        return 0;
+    } else {
+        if (piggy) {
+            this.selectedPiggy = piggy;
+        }
+        this.showPiggy = !this.showPiggy;
+        if (!piggy && !component) {
+            this.getPiggyBanks();
+        }
+        return 0;
     }
-    if(component == 'info'){
-      this.editPiggyLayout = false;
-      return 0;
-    }
-    if(component == "edit"){
-      this.editPiggyLayout = true;
-      return 0;
-    }
-
-    this.showPiggy = !this.showPiggy;
-
-    if (!piggy && !component) {
-      setTimeout(() => {
-        this.getPiggyBanks();
-      }, 200);
-    }
-    
-    return 0;
-
-
   }
+
 
   addToPiggy(piggyBank: PiggyBank){
     this.editPiggyLayout = false;
@@ -100,6 +93,5 @@ export class UserActionsComponent implements OnInit{
   reInitialise(){
     this.reInitialiseAccount.emit();
   }
-
 
 }

@@ -40,50 +40,49 @@ export class AddMoneyToPiggyComponent {
 
   onSubmit(): void {
     this.closeForm.emit();
-    if (this.piggyForm.valid) {
-      const updatedPiggy: PiggyBank = {
-        id: this.piggyInfo.id,
-        account: this.piggyInfo.account,     
-        goal: this.piggyInfo.goal,
-        goalAmount: this.piggyInfo.goalAmount,
-        savedAmount: this.piggyInfo.savedAmount+ this.piggyForm.value.saveAmount
-      };
-
-      console.log(updatedPiggy);
-      
-
-      this.piggyService.updatePiggyBank(updatedPiggy)
-        .subscribe(
-          (response) => {
-            console.log('Account updated successfully:', response);
-            const storedCard = localStorage.getItem('activeCard');
-            const activeCard: Account= JSON.parse(storedCard);
-            const updatedAccount: Account = {
-              id: activeCard.id,
-              title: activeCard.title,
-              currency: activeCard.currency,
-              description: activeCard.description,
-              balance: activeCard.balance - this.piggyForm.value.saveAmount,
-              user: activeCard.user
-            };
-            localStorage.setItem('activeCard', JSON.stringify(updatedAccount));
-
-            this.paymentService.updateAccount(updatedAccount)
-            .subscribe(
-              (response) => {
-                this.reInitialise.emit();
-                console.log('Account updated successfully:', response);
   
-              },
-              (error) => {
-                console.error('Failed to update account:', error);
-              }
-            );
+    if (!this.piggyForm.valid) {
+      return;
+    }
+  
+    const updatedPiggy: PiggyBank = {
+      id: this.piggyInfo.id,
+      account: this.piggyInfo.account,     
+      goal: this.piggyInfo.goal,
+      goalAmount: this.piggyInfo.goalAmount,
+      savedAmount: this.piggyInfo.savedAmount + this.piggyForm.value.saveAmount
+    };
+  
+    this.piggyService.updatePiggyBank(updatedPiggy).subscribe(
+      (response) => {
+        console.log('Account updated successfully:', response);
+        const storedCard = localStorage.getItem('activeCard');
+        const activeCard: Account = JSON.parse(storedCard);
+        const updatedAccount: Account = {
+          id: activeCard.id,
+          title: activeCard.title,
+          currency: activeCard.currency,
+          description: activeCard.description,
+          balance: activeCard.balance - this.piggyForm.value.saveAmount,
+          user: activeCard.user
+        };
+  
+        localStorage.setItem('activeCard', JSON.stringify(updatedAccount));
+  
+        this.paymentService.updateAccount(updatedAccount).subscribe(
+          (response) => {
+            this.reInitialise.emit();
+            console.log('Account updated successfully:', response);
           },
           (error) => {
             console.error('Failed to update account:', error);
           }
         );
-    }
+      },
+      (error) => {
+        console.error('Failed to update account:', error);
+      }
+    );
   }
+  
 }

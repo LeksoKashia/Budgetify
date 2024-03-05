@@ -30,16 +30,16 @@ export class AdminComponent implements OnInit {
 
   toggleCard(card: Account): void {
     this.cards$.subscribe(cards => {
-      cards.forEach(c => {
-        if (c === card) {
-          c.isActive = !c.isActive;
-          if (!c.isActive) {
+      cards.forEach( individualCard=> {
+        if (individualCard === card) {
+          individualCard.isActive = !individualCard.isActive;
+          if (!individualCard.isActive) {
             localStorage.removeItem('activeCard');
           } else {
             localStorage.setItem('activeCard', JSON.stringify(card));
           }
         } else {
-          c.isActive = false; 
+          individualCard.isActive = false; 
         }
       });
     });

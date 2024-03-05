@@ -25,10 +25,7 @@ export class AccountsComponent implements OnInit {
     this.getActiveCard();
   }
   reFetchAccounts() {
-    setTimeout(() => {
-      this.getAccounts();
-    }, 200);
- 
+    this.getAccounts();
   }
 
   getAccounts() {
@@ -46,8 +43,7 @@ export class AccountsComponent implements OnInit {
   getActiveCard() {
     const storedCard = localStorage.getItem('activeCard');
     if (storedCard) {
-      const activeCard = JSON.parse(storedCard);
-      this.activeCardId = activeCard.id;
+      this.activeCardId = JSON.parse(storedCard).id;
     }
   }
 
