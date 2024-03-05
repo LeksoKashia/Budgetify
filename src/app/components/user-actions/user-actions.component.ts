@@ -27,7 +27,6 @@ export class UserActionsComponent implements OnInit {
   activeCard: Account;
   @Output() reInitialiseAccount = new EventEmitter<void>();
 
-
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private paymentService: PaymentsService) { }
   ngOnInit(): void {
     const storedCard = localStorage.getItem('activeCard');
@@ -79,7 +78,6 @@ export class UserActionsComponent implements OnInit {
       return 0;
     }
   }
-
 
   addToPiggy(piggyBank: PiggyBank) {
     this.editPiggyLayout = false;
