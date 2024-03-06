@@ -19,9 +19,7 @@ export class SubscriptionsComponent implements OnInit {
 
   toggleOverlay(s?: string) {
     if(s){
-      setTimeout(() => {
-        this.fetchSubscriptions();
-      }, 200);
+      this.fetchSubscriptions();
     }
     this.showOverlay = !this.showOverlay;
   }
@@ -38,7 +36,7 @@ export class SubscriptionsComponent implements OnInit {
   }
 
   getFirstWord(str: string): string {
-    if (!str) return ''; // Handle empty string case
-    return str.split(' ')[0]; // Split by space and return the first element
+    if (!str) return '';
+    return str.split(' ')[0]; 
   }
 }

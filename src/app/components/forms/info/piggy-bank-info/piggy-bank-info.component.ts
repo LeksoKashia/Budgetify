@@ -18,8 +18,7 @@ export class PiggyBankInfoComponent implements OnInit{
 
 
   ngOnInit(): void {
-    const storedCard = localStorage.getItem('activeCard');
-    this.activeCard= JSON.parse(storedCard);
+    this.activeCard= JSON.parse(localStorage.getItem('activeCard'));
   }
 
   constructor(private piggyService: PiggyBankService, private paymentService: PaymentsService) {}

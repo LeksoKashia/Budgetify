@@ -24,6 +24,7 @@ export class AccountsComponent implements OnInit {
     this.getAccounts();
     this.getActiveCard();
   }
+  
   reFetchAccounts() {
     this.getAccounts();
   }

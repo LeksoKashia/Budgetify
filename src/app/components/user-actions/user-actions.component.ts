@@ -27,7 +27,7 @@ export class UserActionsComponent implements OnInit {
   activeCard: Account;
   @Output() reInitialiseAccount = new EventEmitter<void>();
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private paymentService: PaymentsService) { }
+  constructor(private paymentService: PaymentsService) { }
   ngOnInit(): void {
     const storedCard = localStorage.getItem('activeCard');
     this.activeCard = JSON.parse(storedCard);
@@ -71,9 +71,7 @@ export class UserActionsComponent implements OnInit {
       }
       this.showPiggy = !this.showPiggy;
       if (!piggy && !component) {
-        this.paymentService.getPiggyBanks().subscribe((piggyBanks: PiggyBank[]) => {
-          this.piggyBanks = piggyBanks;
-        });
+        this.getPiggyBanks();
       }
       return 0;
     }
