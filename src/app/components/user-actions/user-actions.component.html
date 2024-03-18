@@ -1,7 +1,7 @@
 <section class="main">
   <div class="actions">
-    <div class="type">
-      <a href="" class="arrow arrow-down">
+    <div (click)="searchType('Income')" class="type">
+      <a class="arrow arrow-down">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
           <path
             d="M7.29289 17.9925C7.68342 18.383 8.31658 18.383 8.70711 17.9925L15.0711 11.6285C15.4616 11.238 15.4616 10.6049 15.0711 10.2143C14.6805 9.82381 14.0474 9.82381 13.6569 10.2143L8 15.8712L2.34315 10.2143C1.95262 9.82381 1.31946 9.82381 0.928932 10.2143C0.538408 10.6049 0.538408 11.238 0.928932 11.6285L7.29289 17.9925ZM7 0.2854L7 17.2854H9L9 0.2854L7 0.2854Z"
@@ -11,8 +11,8 @@
       <p class="type-text">Income</p>
     </div>
 
-    <div class="type">
-      <a href="" class="arrow arrow-up">
+    <div (click)="searchType('Expenses')" class="type">
+      <a class="arrow arrow-up">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
           <path
             d="M8.70711 1.07829C8.31658 0.687769 7.68342 0.687769 7.29289 1.07829L0.928932 7.44226C0.538408 7.83278 0.538408 8.46594 0.928932 8.85647C1.31946 9.24699 1.95262 9.24699 2.34315 8.85647L8 3.19961L13.6569 8.85647C14.0474 9.24699 14.6805 9.24699 15.0711 8.85647C15.4616 8.46594 15.4616 7.83278 15.0711 7.44226L8.70711 1.07829ZM9 18.7854L9 1.7854H7L7 18.7854H9Z"
@@ -62,8 +62,6 @@
         <div *ngIf="showPiggyBankAdd">
           <app-piggy-bank-add (closeForm)="toggleOverlay()"></app-piggy-bank-add>
         </div>
-
-
 
       </div>
     </div>
@@ -116,8 +114,8 @@
             <i class="fa-solid fa-x" (click)="togglePiggy()"></i>
           </div>
         </div>
-        <app-piggy-bank-info *ngIf="!editPiggyLayout && !addMoneyToPiggy" (reInitialise)="reInitialise()" [piggyBankInfo]="selectedPiggy"
-          (closeForm)="togglePiggy()"></app-piggy-bank-info>
+        <app-piggy-bank-info *ngIf="!editPiggyLayout && !addMoneyToPiggy" (reInitialise)="reInitialise()"
+          [piggyBankInfo]="selectedPiggy" (closeForm)="togglePiggy()"></app-piggy-bank-info>
         <app-piggy-bank-edit *ngIf="editPiggyLayout" [piggyInfo]="selectedPiggy"
           (closeForm)="togglePiggy()"></app-piggy-bank-edit>
         <app-add-money-to-piggy (closeForm)="togglePiggy()" (reInitialise)="reInitialise()" *ngIf="addMoneyToPiggy"

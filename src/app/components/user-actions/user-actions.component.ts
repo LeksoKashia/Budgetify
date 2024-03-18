@@ -3,7 +3,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, switchMap } from 'rxjs/operators';
 import { Account } from 'src/app/models/Account.model';
 import { PiggyBank } from 'src/app/models/PiggyBank.model';
-import { PaymentsService } from 'src/app/services/payments.service';
+import { AccountService } from 'src/app/services/accountService/account.service';
 import { PiggyBankService } from 'src/app/services/piggyBankService/piggy-bank.service';
 
 
@@ -26,17 +26,22 @@ export class UserActionsComponent implements OnInit {
   addMoneyToPiggy: boolean = false;
   activeCard: Account;
   @Output() reInitialiseAccount = new EventEmitter<void>();
+  @Output() searchEmit = new EventEmitter<string>();
 
-  constructor(private paymentService: PaymentsService) { }
+  constructor(private accountService: AccountService) { }
   ngOnInit(): void {
     const storedCard = localStorage.getItem('activeCard');
     this.activeCard = JSON.parse(storedCard);
     this.getPiggyBanks();
   }
 
+  searchType(type: string){
+    this.searchEmit.emit(type);
+  }
+
   getPiggyBanks() {
     if (this.activeCard) {
-      this.paymentService.getPiggyBanks().subscribe(
+      this.accountService.getPiggyBanks().subscribe(
         (piggyBanks: PiggyBank[]) => {
           this.piggyBanks = piggyBanks;
         }
@@ -56,6 +61,7 @@ export class UserActionsComponent implements OnInit {
   }
 
   togglePiggy(piggy?: any, component?: string): number {
+   
     if (component === 'info') {
       this.editPiggyLayout = false;
       this.addMoneyToPiggy = false;
@@ -71,13 +77,14 @@ export class UserActionsComponent implements OnInit {
       }
       this.showPiggy = !this.showPiggy;
       if (!piggy && !component) {
-        this.getPiggyBanks();
+          this.getPiggyBanks();
+
       }
       return 0;
     }
   }
 
-  addToPiggy(piggyBank: PiggyBank) {
+  addToPiggy(piggyBank?: PiggyBank) {
     this.editPiggyLayout = false;
     this.addMoneyToPiggy = !this.addMoneyToPiggy;
   }
