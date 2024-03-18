@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Account } from 'src/app/models/Account.model';
-import { PaymentsService } from 'src/app/services/payments.service';
+import { AccountService } from 'src/app/services/accountService/account.service';
 
 @Component({
   selector: 'app-admin',
@@ -12,7 +12,7 @@ import { PaymentsService } from 'src/app/services/payments.service';
 export class AdminComponent implements OnInit {
   cards$: Observable<Account[]>;
 
-  constructor(private paymentsService: PaymentsService) { }
+  constructor(private paymentsService: AccountService) { }
 
   ngOnInit(): void {
     this.cards$ = this.paymentsService.getAccounts();

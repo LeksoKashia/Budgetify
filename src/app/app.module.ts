@@ -28,6 +28,10 @@ import { AddMoneyToPiggyComponent } from './components/forms/add/add-money-to-pi
 import { SubscriptionsComponent } from './components/subscriptions/subscriptions.component';
 import { ObligatoryComponent } from './components/obligatory/obligatory.component';
 import { SubscriptionAddComponent } from './components/forms/add/subscription-add/subscription-add.component';
+import { SubscriptionInfoComponent } from './components/forms/info/subscription-info/subscription-info.component';
+import { SubscriptionEditComponent } from './components/forms/edit/subscription-edit/subscription-edit.component';
+import { ObligatoryAddComponent } from './components/forms/add/obligatory-add/obligatory-add.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -51,7 +55,10 @@ import { SubscriptionAddComponent } from './components/forms/add/subscription-ad
     AddMoneyToPiggyComponent,
     SubscriptionsComponent,
     ObligatoryComponent,
-    SubscriptionAddComponent
+    SubscriptionAddComponent,
+    SubscriptionInfoComponent,
+    SubscriptionEditComponent,
+    ObligatoryAddComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +70,8 @@ import { SubscriptionAddComponent } from './components/forms/add/subscription-ad
       auth: authReducer,
       user: userReducer
     }),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

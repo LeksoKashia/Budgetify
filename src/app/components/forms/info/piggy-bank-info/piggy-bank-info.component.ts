@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Account } from 'src/app/models/Account.model';
 import { PiggyBank } from 'src/app/models/PiggyBank.model';
-import { PaymentsService } from 'src/app/services/payments.service';
+import { AccountService } from 'src/app/services/accountService/account.service';
 import { PiggyBankService } from 'src/app/services/piggyBankService/piggy-bank.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class PiggyBankInfoComponent implements OnInit{
     this.activeCard= JSON.parse(localStorage.getItem('activeCard'));
   }
 
-  constructor(private piggyService: PiggyBankService, private paymentService: PaymentsService) {}
+  constructor(private piggyService: PiggyBankService, private accountService: AccountService) {}
 
   getRangeBackground(savedAmount: number, goalAmount: number) {
     const filledPercentage = (savedAmount / goalAmount) * 100;
@@ -45,7 +45,7 @@ export class PiggyBankInfoComponent implements OnInit{
             user: activeCard.user
           };
           localStorage.setItem('activeCard', JSON.stringify(updatedAccount));
-          this.paymentService.updateAccount(updatedAccount)
+          this.accountService.updateAccount(updatedAccount)
           .subscribe(
             (response) => {
               this.reInitialise.emit();

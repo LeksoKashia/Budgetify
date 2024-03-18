@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { isLoggedIn } from '../redux/selectors/auth.selectors'; 
-import { AuthState } from '../redux/reducers/auth.reducer';
-import * as AuthActions from '../redux/actions/auth.actions';
-import { clearUser } from '../redux/actions/user.actions';
+import { isLoggedIn } from '../../redux/selectors/auth.selectors'; 
+import { AuthState } from '../../redux/reducers/auth.reducer';
+import * as AuthActions from '../../redux/actions/auth.actions';
+import { clearUser } from '../../redux/actions/user.actions';
 import { Router } from '@angular/router';
 
 @Injectable({

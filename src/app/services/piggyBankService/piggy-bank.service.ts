@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UserService } from '../user.service';
+import { UserService } from '../userService/user.service';
 import { PiggyBank } from 'src/app/models/PiggyBank.model';
 import { Observable } from 'rxjs';
 

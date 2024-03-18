@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Account } from 'src/app/models/Account.model';
-import { PaymentsService } from 'src/app/services/payments.service';
+import { AccountService } from 'src/app/services/accountService/account.service';
 
 @Component({
   selector: 'app-account-edit',
@@ -18,7 +18,7 @@ export class AccountEditComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private paymentService: PaymentsService
+    private accountService: AccountService
   ) {}
 
   ngOnInit(): void {
@@ -49,7 +49,7 @@ export class AccountEditComponent implements OnInit {
         user: this.accountInfo.user
       };
 
-      this.paymentService.updateAccount(updatedAccount)
+      this.accountService.updateAccount(updatedAccount)
         .subscribe(
           (response) => {
             console.log('Account updated successfully:', response);

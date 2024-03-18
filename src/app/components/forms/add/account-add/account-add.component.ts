@@ -2,8 +2,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/User.model';
 import { Account } from 'src/app/models/Account.model';
-import { PaymentsService } from 'src/app/services/payments.service';
-import { UserService } from 'src/app/services/user.service';
+import { AccountService } from 'src/app/services/accountService/account.service';
+import { UserService } from 'src/app/services/userService/user.service';
 
 @Component({
   selector: 'app-account-add',
@@ -18,10 +18,10 @@ export class AccountAddComponent {
     title: ['', Validators.required],
     currency: ['USD ($)', Validators.required],
     description: ['', Validators.required],
-    balance: ['', Validators.required] // Assuming balance is required and initialized to 0
+    balance: ['', Validators.required]
   });
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService, private paymentService: PaymentsService) { }
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private accountService: AccountService) { }
 
   close(){
     this.closeForm.emit();
@@ -41,11 +41,11 @@ export class AccountAddComponent {
           balance: this.accountForm.value.balance
         };
 
-        this.paymentService.addAccount(account).subscribe(
+        this.accountService.addAccount(account).subscribe(
           (newAccount: Account) => {
             console.log('Account added successfully:', newAccount);
-            const currentAccounts = this.paymentService.getAccounts().getValue(); 
-            this.paymentService.updateAccounts([...currentAccounts, newAccount]);
+            const currentAccounts = this.accountService.getAccounts().getValue(); 
+            this.accountService.updateAccounts([...currentAccounts, newAccount]);
           },
           (error) => {
             console.error('Error adding account:', error);

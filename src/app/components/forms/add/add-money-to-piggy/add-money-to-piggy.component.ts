@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Account } from 'src/app/models/Account.model';
 import { PiggyBank } from 'src/app/models/PiggyBank.model';
-import { PaymentsService } from 'src/app/services/payments.service';
+import { AccountService } from 'src/app/services/accountService/account.service';
 import { PiggyBankService } from 'src/app/services/piggyBankService/piggy-bank.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class AddMoneyToPiggyComponent {
   constructor(
     private formBuilder: FormBuilder,
     private piggyService: PiggyBankService,
-    private paymentService: PaymentsService
+    private accountService: AccountService
   ) {}
 
   ngOnInit(): void {
@@ -80,7 +80,7 @@ export class AddMoneyToPiggyComponent {
 
     localStorage.setItem('activeCard', JSON.stringify(updatedAccount));
 
-    this.paymentService.updateAccount(updatedAccount).subscribe(
+    this.accountService.updateAccount(updatedAccount).subscribe(
       () => {
         this.reInitialise.emit();
       },

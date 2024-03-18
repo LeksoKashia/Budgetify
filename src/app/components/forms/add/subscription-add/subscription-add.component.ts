@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserService } from 'src/app/services/user.service';
-import { PaymentsService } from 'src/app/services/payments.service';
+import { UserService } from 'src/app/services/userService/user.service';
+import { AccountService } from 'src/app/services/accountService/account.service';
 import { Account } from 'src/app/models/Account.model';
 import { Subscription } from 'src/app/models/Subscription.model';
 import { SubscriptionService } from 'src/app/services/subscriptionService/subscription.service';
@@ -19,7 +19,7 @@ export class SubscriptionAddComponent {
   constructor(
     private formBuilder: FormBuilder,
     private subscriptionService: SubscriptionService,
-    private paymentService: PaymentsService
+    private accountService: AccountService
   ) {
     this.subscriptionForm = this.formBuilder.group({
       title: ['', Validators.required],
@@ -38,8 +38,7 @@ export class SubscriptionAddComponent {
   onSubmit() {
     this.closeForm.emit();
     if (this.subscriptionForm.valid) {
-      const storedCard = localStorage.getItem('activeCard');
-      const activeCard: Account= JSON.parse(storedCard);
+      const activeCard: Account= JSON.parse(localStorage.getItem('activeCard'));
       if (activeCard && activeCard.id) {
         const subscriptionData: Subscription = {
           title: this.subscriptionForm.value.title,

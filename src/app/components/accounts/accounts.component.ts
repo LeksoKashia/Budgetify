@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Account } from 'src/app/models/Account.model';
 import { User } from 'src/app/models/User.model';
-import { PaymentsService } from 'src/app/services/payments.service';
-import { UserService } from 'src/app/services/user.service';
+import { AccountService } from 'src/app/services/accountService/account.service';
+import { UserService } from 'src/app/services/userService/user.service';
 
 @Component({
   selector: 'app-accounts',
@@ -17,8 +17,7 @@ export class AccountsComponent implements OnInit {
   selectedAccount: any;
   activeCardId: any | null = null;
 
-
-  constructor(private paymentsService: PaymentsService, private userService: UserService) {}
+  constructor(private accountService: AccountService) {}
 
   ngOnInit() {
     this.getAccounts();
@@ -30,7 +29,7 @@ export class AccountsComponent implements OnInit {
   }
 
   getAccounts() {
-      this.paymentsService.getAccounts().subscribe(
+      this.accountService.getAccounts().subscribe(
         (accounts: Account[]) => {
           this.accounts = accounts;
         },
@@ -58,7 +57,7 @@ export class AccountsComponent implements OnInit {
   }
 
   delete(accountId: number): void {
-    this.paymentsService.deleteAccount(accountId).subscribe(
+    this.accountService.deleteAccount(accountId).subscribe(
       () => {
         if(this.activeCardId){
           if(this.activeCardId == accountId){

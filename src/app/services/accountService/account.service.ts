@@ -1,14 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Account } from '../models/Account.model';
+import { Account } from '../../models/Account.model';
 import { BehaviorSubject, Observable, Subscription, tap } from 'rxjs';
-import { UserService } from './user.service'; // Import the UserService to fetch user from localStorage
-import { PiggyBank } from '../models/PiggyBank.model';
+import { UserService } from '../userService/user.service'; // Import the UserService to fetch user from localStorage
+import { PiggyBank } from '../../models/PiggyBank.model';
+import { Obligatory } from 'src/app/models/Obligatory.model';
+import { Transaction } from 'src/app/models/Transaction.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PaymentsService {
+export class AccountService {
   private apiServerUrl = 'http://localhost:8080';
   private accountsSubject: BehaviorSubject<Account[]> = new BehaviorSubject<Account[]>([]);
 
@@ -30,7 +32,7 @@ export class PaymentsService {
   
   addAccount(account: Account): Observable<Account> {
     return this.http.post<Account>(
-      `${this.apiServerUrl}/payment/add`,
+      `${this.apiServerUrl}/account/add`,
       account
     ).pipe(
       tap((newAccount: Account) => {
@@ -41,7 +43,7 @@ export class PaymentsService {
   
   updateAccount(account: Account): Observable<Account> {
     return this.http.put<Account>(
-      `${this.apiServerUrl}/payment/update`,
+      `${this.apiServerUrl}/account/update`,
       account
     ).pipe(
       tap(() => {
@@ -57,7 +59,7 @@ export class PaymentsService {
   }
   
   deleteAccount(accountId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiServerUrl}/payment/delete/${accountId}`)
+    return this.http.delete<void>(`${this.apiServerUrl}/account/delete/${accountId}`)
       .pipe(
         tap(() => {
           const updatedAccounts = this.accountsSubject.getValue().filter((acc: Account) => acc.id !== accountId);
@@ -66,16 +68,24 @@ export class PaymentsService {
       );
   }
 
+  getTransactions(): Observable<Transaction[]> {
+    const activeCard : Account = JSON.parse(localStorage.getItem('activeCard'))
+    return this.http.get<Transaction[]>(`${this.apiServerUrl}/account/accounts/transactions/${activeCard.id}`)
+  }
+
   getPiggyBanks(): Observable<PiggyBank[]> {
-    const storedCard = localStorage.getItem('activeCard');
-    const activeCard: Account= JSON.parse(storedCard);
-    return this.http.get<PiggyBank[]>(`${this.apiServerUrl}/payment/accounts/${activeCard.id}`)
+    const activeCard : Account = JSON.parse(localStorage.getItem('activeCard'))
+    return this.http.get<PiggyBank[]>(`${this.apiServerUrl}/account/accounts/${activeCard.id}`)
   }
 
   getSubscriptions(): Observable<Subscription[]> {
-    const storedCard = localStorage.getItem('activeCard');
-    const activeCard: Account= JSON.parse(storedCard);
-    return this.http.get<Subscription[]>(`${this.apiServerUrl}/payment/accounts/subscriptions/${activeCard.id}`)
+    const activeCard : Account = JSON.parse(localStorage.getItem('activeCard'))
+    return this.http.get<Subscription[]>(`${this.apiServerUrl}/account/accounts/subscriptions/${activeCard.id}`)
+  }
+
+  getObligatories(): Observable<Obligatory[]> {
+    const activeCard: Account = JSON.parse(localStorage.getItem('activeCard'));
+    return this.http.get<Obligatory[]>(`${this.apiServerUrl}/account/accounts/obligatories/${activeCard.id}`);
   }
   
   updateAccounts(accounts: Account[]): void {
