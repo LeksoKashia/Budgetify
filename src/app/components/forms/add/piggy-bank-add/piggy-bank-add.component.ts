@@ -1,58 +1,76 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { User } from 'src/app/models/User.model';
 import { Account } from 'src/app/models/Account.model';
-import { PaymentsService } from 'src/app/services/payments.service';
-import { UserService } from 'src/app/services/user.service';
 import { PiggyBank } from 'src/app/models/PiggyBank.model';
+import { AccountService } from 'src/app/services/accountService/account.service';
 import { PiggyBankService } from 'src/app/services/piggyBankService/piggy-bank.service';
+import { UserService } from 'src/app/services/userService/user.service';
+
 @Component({
   selector: 'app-piggy-bank-add',
   templateUrl: './piggy-bank-add.component.html',
   styleUrls: ['./piggy-bank-add.component.scss']
 })
-export class PiggyBankAddComponent {
+export class PiggyBankAddComponent implements OnInit {
   @Output() closeForm = new EventEmitter<void>();
 
-  piggyForm : FormGroup = this.formBuilder.group({
+  piggyForm: FormGroup = this.formBuilder.group({
     goal: ['', Validators.required],
     goalAmount: ['', Validators.required],
-    savedAmount: [0, Validators.required]
+    savedAmount: [0, Validators.required],
+    selectedAccount: ['', Validators.required]
   });
 
-  constructor(private formBuilder: FormBuilder, private piggyBankService: PiggyBankService, private paymentService: PaymentsService) { }
+  accounts: Account[] = [];
 
-  close(){
+  constructor(
+    private formBuilder: FormBuilder,
+    private piggyBankService: PiggyBankService,
+    private accountService: AccountService
+  ) { }
+
+  ngOnInit() {
+    this.getAccounts();
+  }
+
+  getAccounts() {
+    this.accountService.getAccounts().subscribe(
+      (accounts: Account[]) => {
+        this.accounts = accounts;
+      },
+      (error) => {
+        console.error('Error fetching accounts:', error);
+      }
+    );
+  }
+
+  close() {
     this.closeForm.emit();
   }
-  
+
   onSubmit() {
     this.closeForm.emit();
     if (this.piggyForm.valid) {
-      console.log('Account data:', this.piggyForm.value);
-      const storedCard = localStorage.getItem('activeCard');
-      const activeCard: Account= JSON.parse(storedCard);
-      console.log("asdsa", activeCard);
-      
-      if (activeCard && activeCard.id) {
+      const selectedAccount = this.accounts.find(account => account.id == this.piggyForm.value.selectedAccount);
+
+      if (selectedAccount) {
         const piggyBank: PiggyBank = {
-          account: activeCard, 
+          account: selectedAccount,
           goal: this.piggyForm.value.goal,
           goalAmount: this.piggyForm.value.goalAmount,
           savedAmount: this.piggyForm.value.savedAmount
         };
-        console.log(piggyBank);
-        
+
         this.piggyBankService.addPiggyBank(piggyBank).subscribe(
           (newPiggyBank: PiggyBank) => {
-            console.log('Account added successfully:', newPiggyBank);
+            console.log('Piggy bank added successfully:', newPiggyBank);
           },
           (error) => {
-            console.error('Error adding account:', error);
+            console.error('Error adding piggy bank:', error);
           }
         );
       } else {
-        console.error('User information not found.');
+        console.error('Selected account not found.');
       }
     } else {
       console.log('Please fill in all fields.');

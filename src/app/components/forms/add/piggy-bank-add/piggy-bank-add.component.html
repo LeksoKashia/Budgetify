@@ -1,5 +1,7 @@
 <form [formGroup]="piggyForm" (ngSubmit)="onSubmit()" class="custom-form">
   <div class="form-div">
+    
+
     <div class="form-group">
       <label for="goal" class="input-label">Goal:</label>
       <input type="text" id="goal" formControlName="goal" class="custom-input" placeholder="Enter goal">
@@ -10,18 +12,18 @@
       <input type="number" id="goalAmount" formControlName="goalAmount" class="custom-input"
         placeholder="Enter goal amount">
     </div>
-
-    <label for="savedAmount" class="input-label">Goal Amount:</label>
-    <input type="hidden" id="goalAmount" formControlName="goalAmount" class="custom-input"
-      placeholder="Enter goal amount">
-
-
+    <div class="form-group">
+      <label for="selectedAccount" class="input-label">Select Account:</label>
+      <select id="selectedAccount" formControlName="selectedAccount" class="custom-input">
+        <option value="" disabled selected>Select Card</option>
+        <option *ngFor="let account of accounts" [value]="account.id">{{ account.title }}</option>
+      </select>
+    </div>
+    
   </div>
 
   <div class="buttons">
     <button type="button" class="btn-secondary" (click)="close()">Cancel</button>
     <button type="submit" [disabled]="!piggyForm.valid" class="btn btn-primary">Save</button>
   </div>
-
-
 </form>
