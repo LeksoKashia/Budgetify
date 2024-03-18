@@ -47,3 +47,25 @@
   color: rgba(55, 55, 55, 1);
   font-family: "Space Grotesk", sans-serif;
 }
+
+.search-container{
+  margin-bottom: 10px;
+}
+
+.date{
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+  align-items: center;
+}
+
+.date p{
+    margin: 0;
+}
+
+.date-input{
+  padding: 7px;
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(215, 217, 217);
+}

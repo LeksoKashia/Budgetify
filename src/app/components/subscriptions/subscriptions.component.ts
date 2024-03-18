@@ -1,33 +1,50 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'src/app/models/Subscription.model';
-import { PaymentsService } from 'src/app/services/payments.service';
+import { AccountService } from 'src/app/services/accountService/account.service';
 
 @Component({
   selector: 'app-subscriptions',
   templateUrl: './subscriptions.component.html',
-  styleUrls: ['./subscriptions.component.scss']
+  styleUrls: ['./subscriptions.component.scss', '../home/home.component.scss']
 })
 export class SubscriptionsComponent implements OnInit {
   subscriptions: Subscription[];
+  filteredSubscriptions: Subscription[];
   showOverlay: boolean = false;
+  searchTerm: string = '';
+  showAddSubscription: boolean;
+  showInfoSubscription: boolean;
+  selectedSubscription: Subscription;
+  selectedDate: string = '';
 
-  constructor(private paymentService: PaymentsService) {}
+
+  constructor(private accountService: AccountService) {}
 
   ngOnInit() {
     this.fetchSubscriptions();
   }
 
-  toggleOverlay(s?: string) {
-    if(s){
-      this.fetchSubscriptions();
+  toggleOverlay(action?: string, subscription?: Subscription) {
+    if(action == 'add'){
+      this.showAddSubscription = true;
+      this.showInfoSubscription = false;
+    }else{
+      this.showInfoSubscription = true;
+      this.showAddSubscription = false;
     }
+    
+    if(subscription){
+      this.selectedSubscription = subscription;
+    }
+    
     this.showOverlay = !this.showOverlay;
   }
 
   fetchSubscriptions() {
-    this.paymentService.getSubscriptions().subscribe(
+    this.accountService.getSubscriptions().subscribe(
       (subscriptions: any) => {
         this.subscriptions = subscriptions;
+        this.filterSubscriptions(); 
       },
       (error) => {
         console.error('Error fetching subscriptions:', error);
@@ -35,8 +52,21 @@ export class SubscriptionsComponent implements OnInit {
     );
   }
 
+  filterSubscriptions() {
+    if (this.searchTerm.trim() === '' && this.selectedDate === '') {
+      this.filteredSubscriptions = this.subscriptions;
+    } else {
+      const selectedDateObj = this.selectedDate ? new Date(this.selectedDate) : null;
+      this.filteredSubscriptions = this.subscriptions.filter(obligatory =>
+        obligatory.title.toLowerCase().includes(this.searchTerm.toLowerCase()) &&
+        (!selectedDateObj || (selectedDateObj >= new Date(obligatory.startDate) && selectedDateObj <= new Date(obligatory.endDate)))
+      );
+    }
+
+  }
+
   getFirstWord(str: string): string {
     if (!str) return '';
-    return str.split(' ')[0]; 
+    return str.split(',')[0]; 
   }
 }
