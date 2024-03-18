@@ -13,7 +13,8 @@
 }
 
 .account{
-  width: 100%;
+  max-width: 100%;
+  min-width: 250px;
   position: relative;
   cursor: pointer;
 }
@@ -87,4 +88,17 @@
 
 .accountbg:hover {
   -webkit-transform: scale(1.01);
+}
+
+@media only screen and (max-width: 1250px) {
+  .info-account{
+    top: 20px;
+  }
+  .title-account{
+    font-size: 24px;
+  }
+  .balance-account{
+    font-size: 30px;
+  }
+
 }
