@@ -1,0 +1,37 @@
+
+
+.obligatory{
+  width: 100%;
+  padding: 15px;
+  background-color: rgba(249, 249, 249, 1);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.obligatory-head{
+  display:flex;
+  justify-content: space-between;
+}
+
+p{
+  margin: 0;
+}
+
+.obligatories{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.obligatory-head h2{
+  font-size: 20px;
+  font-weight: 400;
+  color: rgba(55, 55, 55, 1);
+}
+
+.obligatory-head h3{
+  font-size: 22px;
+  color: rgba(238, 63, 25, 1);
+}

@@ -8,18 +8,35 @@
 
   <div class="main">
     <div class="search-container">
-
       <button class="icon-search">
         <i class="fa-solid fa-magnifying-glass"></i>
       </button>
-      <input type="text" class="search" placeholder="Search">
-
+      <input type="text" class="search" placeholder="Search" [(ngModel)]="searchTerm" (input)="filterObligatories()">
     </div>
 
-    <p style="margin-top: 7px; padding-left: 15px;color: rgba(71, 71, 71, 1);"><i class="fa-solid fa-filter"></i>
-      Creation Date</p>
+    <div class="date">
+      <p>Filter by date: </p>
+      <input type="date" class="date-input" [(ngModel)]="selectedDate" (change)="filterObligatories()">
+    </div>
 
-    <p style="padding-left: 3px;">No obligatories found.</p>
+
+
+
+
+
+    <div *ngIf="filteredObligatories.length > 0" class="obligatories">
+      <div *ngFor="let obligatory of filteredObligatories" class="obligatory">
+        <div class="obligatory-head">
+          <h2>{{obligatory.title}}</h2>
+          <h3>{{obligatory.amount}} $</h3>
+        </div>
+        <p>Payment Dates: <strong>{{obligatory.startDate | date}}-{{obligatory.endDate | date}}</strong></p>
+      </div>
+    </div>
+
+
+
+    <p style="padding-left: 3px;" *ngIf="filteredObligatories.length == 0">No obligatories found.</p>
 
   </div>
 
@@ -60,7 +77,7 @@
           </a>
         </div>
 
-        <app-subscription-add (closeForm)="toggleOverlay('kaito')"></app-subscription-add>
+        <app-obligatory-add (closeForm)="toggleOverlay('kaito')"></app-obligatory-add>
 
       </div>
 
