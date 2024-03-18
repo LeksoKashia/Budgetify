@@ -1,0 +1,95 @@
+.custom-form{
+  height: calc(100vh - 280px);
+  overflow-y: auto;
+
+}
+.title-form-div{
+  margin-top: 5px !important;
+}
+.types{
+  margin-bottom: 30px;
+  display: flex;
+  gap: 20px;
+  padding: 0 25px;
+}
+
+.types div{
+  background-color: green;
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  width: 30%;
+  padding: 5px 10px;
+  background-color: rgba(249, 249, 249, 1);
+  border: 2px solid rgba(55, 55, 55, 1);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.blur{
+  filter: blur(2px);
+}
+
+p{
+  margin: 0;
+}
+.arrow{
+  width:35px;
+  height:35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrow-down{
+  background-color: rgba(33, 194, 6, 1);
+}
+
+.arrow-up{
+  background-color: rgba(238, 63, 25, 1);
+}
+
+.add{
+  background-color: white;
+  cursor: pointer;
+}
+
+.addFile{
+  width: 90px;
+  height: 70px;
+  border-radius: 7px;
+  border: 1px dashed black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.fifi{
+  position: relative;
+  width: 20%;
+}
+
+.remove-image{
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  color: red;
+  font-size: 13px;
+  padding: 3px 7px;
+  background-color: rgb(220 220 220);
+  border-radius: 8px;
+}
+
+.files-array{
+  display: flex;
+  gap: 10px;
+}
+
+.uploaded{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,1 +1,91 @@
-<p>transaction-add works!</p>
+<div class="types">
+  <div (click)="selectType('expenses')" [ngClass]="{'blur': !expensesType}">
+    <a class="arrow arrow-up">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
+        <path
+          d="M8.70711 1.07829C8.31658 0.687769 7.68342 0.687769 7.29289 1.07829L0.928932 7.44226C0.538408 7.83278 0.538408 8.46594 0.928932 8.85647C1.31946 9.24699 1.95262 9.24699 2.34315 8.85647L8 3.19961L13.6569 8.85647C14.0474 9.24699 14.6805 9.24699 15.0711 8.85647C15.4616 8.46594 15.4616 7.83278 15.0711 7.44226L8.70711 1.07829ZM9 18.7854L9 1.7854H7L7 18.7854H9Z"
+          fill="white" />
+      </svg>
+    </a>
+    <p>Expenses</p>
+  </div>
+  <div (click)="selectType('income')" [ngClass]="{'blur': expensesType}">
+
+    <a class="arrow arrow-down">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
+        <path
+          d="M7.29289 17.9925C7.68342 18.383 8.31658 18.383 8.70711 17.9925L15.0711 11.6285C15.4616 11.238 15.4616 10.6049 15.0711 10.2143C14.6805 9.82381 14.0474 9.82381 13.6569 10.2143L8 15.8712L2.34315 10.2143C1.95262 9.82381 1.31946 9.82381 0.928932 10.2143C0.538408 10.6049 0.538408 11.238 0.928932 11.6285L7.29289 17.9925ZM7 0.2854L7 17.2854H9L9 0.2854L7 0.2854Z"
+          fill="white" />
+      </svg>
+    </a>
+    <p>Income</p>
+  </div>
+</div>
+<form [formGroup]="transactionForm" (ngSubmit)="onSubmit()" class="custom-form">
+  <div class="form-div">
+    <div class="form-group title-form-div">
+      <label for="title" class="input-label">Title:</label>
+      <input type="text" id="title" formControlName="title" class="custom-input" placeholder="Enter title">
+    </div>
+
+    <div class="form-group">
+      <label for="categories" class="input-label">Categories:</label>
+      <input type="text" id="categories" formControlName="categories" class="custom-input"
+        placeholder="Enter categories">
+    </div>
+
+    <div class="form-group">
+      <label for="amount" class="input-label">Amount:</label>
+      <input type="number" id="amount" formControlName="amount" class="custom-input" placeholder="Enter amount">
+    </div>
+
+    <div class="form-group">
+      <label for="paymentDate" class="input-label">Payment Date:</label>
+      <input type="date" id="paymentDate" formControlName="paymentDate" class="custom-input">
+    </div>
+
+    <div class="form-group">
+      <label for="payee" class="input-label">Payee:</label>
+      <input id="payee" formControlName="payee" class="custom-input" placeholder="Enter payee">
+    </div>
+
+    <div class="form-group">
+      <label for="description" class="input-label">Description:</label>
+      <input id="description" formControlName="description" class="custom-input" placeholder="Enter description">
+    </div>
+
+    <div formArrayName="files" class="files-array">
+      <div *ngFor="let fileControl of filesFormArray.controls; let i = index" class="filebi addFile"
+        (click)="addFile.click()" style="position: relative;"
+        [style.border]="fileSelected[i] ? 'none' : '1px dashed black'">
+
+        <div class="uploaded" [style.display]="fileSelected[i] ? 'block' : 'none'">
+          <img src="../../../../../assets/uploaded.png" alt="" style="width: 100%;height: 100%; margin-bottom: 10px;">
+          <span style="margin-left: 3px;">{{ changedInputs[i] }}</span>
+          <a (click)="removeFile(i)" class="remove-image"> <i class="fa-solid fa-x"></i></a>
+        </div>
+
+        <a *ngIf="!fileSelected[i]"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"
+            fill="none">
+            <path
+              d="M5.75235 14.3127V9.44871H0.952346V5.80071H5.75235V0.936707H9.52835V5.80071H14.3283V9.44871H9.52835V14.3127H5.75235Z"
+              fill="black" />
+          </svg></a>
+
+        <input #addFile type="file" [formControlName]="i" class="custom-input" style="display: none;"
+          (change)="handleFileInput($event, i)">
+
+      </div>
+    </div>
+
+
+    <!-- Button to add more files -->
+
+
+  </div>
+
+  <div class="buttons">
+    <button type="button" class="btn-secondary">Cancel</button>
+    <button type="submit" [disabled]="!transactionForm.valid" class="btn btn-primary">Save</button>
+  </div>
+</form>
