@@ -1,0 +1,110 @@
+.date{
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.date p{
+  margin: 0;
+}
+
+.date-input{
+  padding: 7px;
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(215, 217, 217);
+}
+
+.transactions-container,
+.subscriptions-container {
+  margin-top: 25px;
+}
+
+.transaction,
+.subscription {
+  display: flex;
+  gap: 10px;
+  background-color: white;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.transaction-category,
+.subscription-category {
+  width: 25%;
+  align-self: center;
+  padding-left: 10px;
+}
+
+.category {
+  padding: 15px 25px;
+  background-color: rgba(236, 237, 237, 1);
+  width: 95%;
+  outline: none;
+  border: none;
+  font-size: 20px;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+}
+
+.transaction-info,
+.subscription-info {
+  width: 70%;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}
+
+.transaction-info p,
+.subscription-info p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.transaction-detailed-info{
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.transaction-amount,
+.subscription-amount {
+  width: 20%;
+  text-align: right;
+  padding-right: 10px;
+  font-size: 20px;
+}
+
+.no-transactions,
+.no-subscriptions {
+  padding-left: 3px;
+}
+
+
+.arrow {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 35px; 
+  vertical-align: middle; 
+  display: inline-block;
+}
+
+.arrow-down{
+  background-color: rgba(33, 194, 6, 1);
+}
+
+.arrow-up{
+  background-color: rgba(238, 63, 25, 1);
+}
+
+.add{
+  background-color: white;
+  cursor: pointer;
+}
