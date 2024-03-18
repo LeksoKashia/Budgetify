@@ -1,0 +1,35 @@
+<div class="head-overlay">
+  <h1 class="title-overlay">Account Information</h1>
+  <div class="secondary-actions">
+    <i class="fa-solid fa-trash" (click)="deleteSubscription(subscription.id)"></i>
+    <i class="fa-solid fa-pen" (click)="toggleEdit()"></i>
+    <i class="fa-solid fa-x" (click)="closeForm()"></i>
+  </div>
+</div>
+<div *ngIf="!showEditSubscription">
+  <div class="info">
+    <div class="subscription-head">
+      <h2>
+        {{subscription.title}}
+      </h2>
+      <p>{{subscription.amount}}$</p>
+    </div>
+    <div class="categories">
+      <button *ngFor="let category of subscription.categories.split(',')" class="category">
+        {{category}}
+      </button>
+    </div>
+    <div class="block-info dates">
+      <h3>Payment Dates:</h3>
+      <p>{{subscription.startDate | date}}-{{subscription.endDate | date}}</p>
+    </div>
+    <div class="block-info">
+      <h3>Description:</h3>
+      <p>{{subscription.description}}</p>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showEditSubscription">
+  <app-subscription-edit [subscriptionInfo]="subscription" (closeForm)="closeForm()"></app-subscription-edit>
+</div>
