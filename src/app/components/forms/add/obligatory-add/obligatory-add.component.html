@@ -1,0 +1,34 @@
+
+<form [formGroup]="obligatoryForm" (ngSubmit)="onSubmit()" class="custom-form">
+  <div class="form-div ">
+    <div class="form-group">
+      <label for="title" class="input-label">Title:</label>
+      <input type="text" id="title" formControlName="title" class="custom-input" placeholder="Enter title">
+    </div>
+
+    <div class="form-group">
+      <label for="amount" class="input-label">Amount:</label>
+      <input type="number" id="amount" formControlName="amount" class="custom-input" placeholder="Enter amount">
+    </div>
+
+    <div class="form-group">
+      <label for="startDate" class="input-label">Start Date:</label>
+      <input type="date" id="startDate" formControlName="startDate" class="custom-input">
+    </div>
+
+    <div class="form-group">
+      <label for="endDate" class="input-label">End Date:</label>
+      <input type="date" id="endDate" formControlName="endDate" class="custom-input">
+    </div>
+
+    <div class="form-group">
+      <label for="description" class="input-label">Description:</label>
+      <input id="description" formControlName="description" class="custom-input" placeholder="Enter description">
+    </div>
+  </div>
+
+  <div class="buttons">
+    <button type="button" class="btn-secondary" (click)="close()">Cancel</button>
+    <button type="submit" [disabled]="!obligatoryForm.valid" class="btn btn-primary">Save</button>
+  </div>
+</form>
