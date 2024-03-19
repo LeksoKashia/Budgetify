@@ -20,6 +20,14 @@
 .transactions-container,
 .subscriptions-container {
   margin-top: 25px;
+  height: calc(100vh - 260px);
+  overflow-y: auto;
+}
+
+.transactions-container::-webkit-scrollbar,
+.subscriptions-container::-webkit-scrollbar  {
+  width: 0;
+  height: 0;
 }
 
 .transaction,
