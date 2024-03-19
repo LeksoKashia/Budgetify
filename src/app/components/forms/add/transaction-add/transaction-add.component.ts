@@ -4,13 +4,12 @@ import { Account } from 'src/app/models/Account.model';
 import { ImageModel } from 'src/app/models/Image.model';
 import { Transaction } from 'src/app/models/Transaction.model';
 import { ImageService } from 'src/app/services/ImageService/image.service';
-import { AccountService } from 'src/app/services/accountService/account.service';
 import { TransactionService } from 'src/app/services/transactionService/transaction.service';
 
 @Component({
   selector: 'app-transaction-add',
   templateUrl: './transaction-add.component.html',
-  styleUrls: ['./transaction-add.component.scss', "../../add/account-add/account-add.component.scss"]
+  styleUrls: ['./transaction-add.component.scss']
 })
 export class TransactionAddComponent {
   type: string = 'Expenses';
