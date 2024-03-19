@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Account } from 'src/app/models/Account.model';
 import { ImageModel } from 'src/app/models/Image.model';
@@ -15,8 +15,10 @@ import { TransactionService } from 'src/app/services/transactionService/transact
 export class TransactionAddComponent {
   type: string = 'Expenses';
   expensesType: boolean = true;
-  fileSelected: boolean[] = []; 
-  changedInputs: string[] = []; // Array to store names of changed inputs
+  fileSelected: boolean[] = [];
+  changedInputs: string[] = [];
+
+  @Output() closeForm = new EventEmitter<void>();
 
 
   transactionForm: FormGroup = this.formBuilder.group({
@@ -25,67 +27,46 @@ export class TransactionAddComponent {
     amount: ['', Validators.required],
     paymentDate: ['', Validators.required],
     payee: ['', Validators.required],
-    description: ['', Validators.required], 
-    files: this.formBuilder.array([this.formBuilder.control(null)]) 
+    description: ['', Validators.required],
+    files: this.formBuilder.array([this.formBuilder.control(null)])
   });
 
   constructor(private formBuilder: FormBuilder, private transactionService: TransactionService, private imageService: ImageService) { }
 
   selectType(type: string) {
-    if (type == "expenses") {
-      this.type = "Expenses";
-      this.expensesType = true;
-    } else {
-      this.type = "Income";
-      this.expensesType = false;
-    }
+    this.type = type === "expenses" ? "Expenses" : "Income";
+    this.expensesType = type === "expenses";
   }
 
   onSubmit() {
-    const activeCard: Account= JSON.parse(localStorage.getItem('activeCard'));
+    this.closeForm.emit();
+    const activeCard: Account = JSON.parse(localStorage.getItem('activeCard'));
     const transaction: Transaction = {
-      account:activeCard,
+      account: activeCard,
       type: this.type,
-      title: this.transactionForm.value.title,
-      categories: this.transactionForm.value.categories,
-      amount: this.transactionForm.value.amount,
-      paymentDate: this.transactionForm.value.paymentDate,
-      payee: this.transactionForm.value.payee,
-      description: this.transactionForm.value.description
+      ...this.transactionForm.value
     };
 
     this.transactionService.addTransaction(transaction)
       .subscribe(
         (transactionResponse: Transaction) => {
-          console.log('Transaction added successfully:', transactionResponse);
           for (let index = 0; index < this.transactionForm.value.files.length; index++) {
-            console.log(this.transactionForm.value.files[index]);
             const path = this.transactionForm.value.files[index]
-            const parts = path.split(/[\\\/]/);
-            console.log(parts[parts.length - 1]);
+            const fileName = path.split(/[\\\/]/).pop();
             const image: ImageModel = {
               transaction: transactionResponse,
-              fileName: parts[parts.length - 1],
+              fileName: fileName,
               filePath: path
             }
 
-            console.log(image);
-            
-            this.imageService.addImage(image).subscribe(
-              (response) => {
-
-              }
-            )
-             
+            this.imageService.addImage(image).subscribe();
           }
         },
         (error) => {
-          // Handle error response
           console.error('Error adding transaction:', error);
         }
       );
   }
-
 
   get filesFormArray() {
     return this.transactionForm.get('files') as FormArray;
@@ -97,17 +78,15 @@ export class TransactionAddComponent {
 
   removeFile(index: number) {
     this.filesFormArray.removeAt(index);
-    this.fileSelected.splice(index, 1); // Remove corresponding entry from fileSelected array
-    this.changedInputs.splice(index, 1); // Remove corresponding entry from changedInputs array
+    this.fileSelected.splice(index, 1);
+    this.changedInputs.splice(index, 1);
   }
-  
 
   handleFileInput(event: any, index: number) {
-    const inputName = event.target.files[0].name; // Get the name of the changed file
+    const inputName = event.target.files[0].name;
 
     this.addFile();
-    this.fileSelected[index] = true; // Set corresponding entry in fileSelected array to true when file is selected
-    this.changedInputs[index] = inputName; // Store the name in changedInputs array
-
+    this.fileSelected[index] = true;
+    this.changedInputs[index] = inputName;
   }
 }
