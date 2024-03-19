@@ -33,31 +33,34 @@ export class ObligatoryAddComponent {
 
   onSubmit() {
     this.closeForm.emit();
-    if (this.obligatoryForm.valid) {
-      const activeCard: Account= JSON.parse(localStorage.getItem('activeCard'));
-      if (activeCard && activeCard.id) {
-        const obligatoryData: Obligatory = {
-          title: this.obligatoryForm.value.title,
-          amount: this.obligatoryForm.value.amount,
-          startDate: this.obligatoryForm.value.startDate,
-          endDate: this.obligatoryForm.value.endDate,
-          description: this.obligatoryForm.value.description,
-          account: activeCard
-        };
 
-        this.obligatoryService.addObligatory(obligatoryData).subscribe(
-          (newSubscription: Obligatory) => {
-            console.log('Subscription added successfully:', newSubscription);
-          },
-          (error) => {
-            console.error('Error adding subscription:', error);
-          }
-        );
-      } else {
-        console.error('User information not found.');
-      }
-    } else {
+    if (!this.obligatoryForm.valid) {
       console.log('Please fill in all fields.');
+      return;
     }
+
+    const activeCard: Account= JSON.parse(localStorage.getItem('activeCard'));
+    if (!(activeCard && activeCard.id)) {
+        console.error('Card information not found.');
+        return;
+    }
+    
+    const obligatoryData: Obligatory = {
+      title: this.obligatoryForm.value.title,
+      amount: this.obligatoryForm.value.amount,
+      startDate: this.obligatoryForm.value.startDate,
+      endDate: this.obligatoryForm.value.endDate,
+      description: this.obligatoryForm.value.description,
+      account: activeCard
+    };
+
+    this.obligatoryService.addObligatory(obligatoryData).subscribe(
+      (newSubscription: Obligatory) => {
+        console.log('Obligatory added successfully:', newSubscription);
+      },
+      (error) => {
+        console.error('Error adding obligatory:', error);
+      }
+    );
   }
 }
