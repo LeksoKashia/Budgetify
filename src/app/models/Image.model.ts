@@ -1,4 +1,4 @@
-import { Transaction } from "./Transaction.model";
+import { Transaction } from "./transaction.model";
 
 export interface ImageModel {
   id?: number;

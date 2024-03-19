@@ -1,15 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
 import { Observable } from 'rxjs';
-import { ImageModel } from 'src/app/models/Image.model';
+import { Constants } from 'src/app/constants/constants';
+import { ImageModel } from 'src/app/models/image.model';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImageService {
-  private apiServerUrl = 'http://localhost:8080';
+  private apiServerUrl = Constants.apiUrl;  
   
   constructor(private http: HttpClient) {}
 

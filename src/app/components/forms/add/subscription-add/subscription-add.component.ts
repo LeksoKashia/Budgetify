@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserService } from 'src/app/services/userService/user.service';
-import { AccountService } from 'src/app/services/accountService/account.service';
-import { Account } from 'src/app/models/Account.model';
-import { Subscription } from 'src/app/models/Subscription.model';
-import { SubscriptionService } from 'src/app/services/subscriptionService/subscription.service';
+import { UserService } from 'src/app/services/user.service';
+import { AccountService } from 'src/app/services/account.service';
+import { Account } from 'src/app/models/account.model';
+import { Subscription } from 'src/app/models/subscription.model';
+import { SubscriptionService } from 'src/app/services/subscription.service';
 
 @Component({
   selector: 'app-subscription-add',

@@ -1,4 +1,4 @@
-import { Account } from "./Account.model";
+import { Account } from "./account.model";
 
 export interface PiggyBank {
   id?: number;

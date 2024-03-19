@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from 'src/app/models/Subscription.model';
-import { SubscriptionService } from 'src/app/services/subscriptionService/subscription.service';
+import { Subscription } from 'src/app/models/subscription.model';
+import { SubscriptionService } from 'src/app/services/subscription.service';
 
 @Component({
   selector: 'app-subscription-edit',
@@ -37,28 +37,28 @@ export class SubscriptionEditComponent {
 
   onSubmit(): void {
     this.closeForm.emit();
-    if (this.subscriptionForm.valid) {
-      const updatedSubscription: Subscription = {
-        id: this.subscriptionInfo.id,
-        title: this.subscriptionForm.value.title,
-        amount: this.subscriptionForm.value.amount,
-        categories: this.subscriptionForm.value.categories,
-        startDate: this.subscriptionInfo.startDate,
-        description: this.subscriptionForm.value.description,
-        endDate: this.subscriptionInfo.endDate,
-        account: this.subscriptionInfo.account
-      };
-
-      this.subscriptionService.updateSubscription(updatedSubscription)
-        .subscribe(
-          (response) => {
-            console.log('Account updated successfully:', response);
-          },
-          (error) => {
-            console.error('Failed to update account:', error);
-          }
-        );
+    if (!this.subscriptionForm.valid) {
+      return;
     }
+    const updatedSubscription: Subscription = {
+      id: this.subscriptionInfo.id,
+      title: this.subscriptionForm.value.title,
+      amount: this.subscriptionForm.value.amount,
+      categories: this.subscriptionForm.value.categories,
+      startDate: this.subscriptionInfo.startDate,
+      description: this.subscriptionForm.value.description,
+      endDate: this.subscriptionInfo.endDate,
+      account: this.subscriptionInfo.account
+    };
+    this.subscriptionService.updateSubscription(updatedSubscription)
+      .subscribe(
+        (response) => {
+          console.log('Account updated successfully:', response);
+        },
+        (error) => {
+          console.error('Failed to update account:', error);
+        }
+      );
   }
 
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Obligatory } from 'src/app/models/Obligatory.model';
-import { ObligatoryService } from 'src/app/services/obligatoryService/obligatory.service';
-import { AccountService } from 'src/app/services/accountService/account.service';
+import { Obligatory } from 'src/app/models/obligatory.model';
+import { ObligatoryService } from 'src/app/services/obligatory.service';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-obligatory',

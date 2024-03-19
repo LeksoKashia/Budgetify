@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Account } from 'src/app/models/Account.model';
-import { PiggyBank } from 'src/app/models/PiggyBank.model';
-import { AccountService } from 'src/app/services/accountService/account.service';
-import { PiggyBankService } from 'src/app/services/piggyBankService/piggy-bank.service';
+import { Account } from 'src/app/models/account.model';
+import { PiggyBank } from 'src/app/models/piggyBank.model';
+import { AccountService } from 'src/app/services/account.service';
+import { PiggyBankService } from 'src/app/services/piggy-bank.service';
 
 @Component({
   selector: 'app-piggy-bank-info',

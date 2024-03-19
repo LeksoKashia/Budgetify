@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Transaction } from 'src/app/models/Transaction.model';
+import { Transaction } from 'src/app/models/transaction.model';
+import { Constants } from 'src/app/constants/constants';
 import { Observable } from 'rxjs';
 
 
@@ -8,8 +9,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TransactionService {
-  private apiServerUrl = 'http://localhost:8080';
-  
+  private apiServerUrl = Constants.apiUrl;  
   constructor(private http: HttpClient) {}
 
   addTransaction(transaction: Transaction): Observable<Transaction> {

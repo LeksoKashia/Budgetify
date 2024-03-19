@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subscription } from 'src/app/models/Subscription.model';
+import { Subscription } from 'src/app/models/subscription.model';
+import { Constants } from 'src/app/constants/constants';
 import { Observable } from 'rxjs';
 
 
@@ -8,8 +9,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SubscriptionService {
-  private apiServerUrl = 'http://localhost:8080';
-  
+  private apiServerUrl = Constants.apiUrl;  
   constructor(private http: HttpClient) {}
 
   addSubscription(subscription: Subscription): Observable<Subscription> {

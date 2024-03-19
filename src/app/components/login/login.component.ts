@@ -3,9 +3,9 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { User } from 'src/app/models/User.model';
-import { AuthService } from 'src/app/services/authService/auth.service';
-import { UserService } from 'src/app/services/userService/user.service';
+import { User } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 import { AuthState } from '../../redux/reducers/auth.reducer';
 
 @Component({

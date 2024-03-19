@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Account } from 'src/app/models/Account.model';
-import { PiggyBank } from 'src/app/models/PiggyBank.model';
-import { AccountService } from 'src/app/services/accountService/account.service';
-import { PiggyBankService } from 'src/app/services/piggyBankService/piggy-bank.service';
-import { UserService } from 'src/app/services/userService/user.service';
+import { Account } from 'src/app/models/account.model';
+import { PiggyBank } from 'src/app/models/piggyBank.model';
+import { AccountService } from 'src/app/services/account.service';
+import { PiggyBankService } from 'src/app/services/piggy-bank.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-piggy-bank-add',

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Subscription } from 'src/app/models/Subscription.model';
-import { SubscriptionService } from 'src/app/services/subscriptionService/subscription.service';
+import { Subscription } from 'src/app/models/subscription.model';
+import { SubscriptionService } from 'src/app/services/subscription.service';
 
 @Component({
   selector: 'app-subscription-info',

@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Account } from 'src/app/models/Account.model';
-import { Obligatory } from 'src/app/models/Obligatory.model';
-import { ObligatoryService } from 'src/app/services/obligatoryService/obligatory.service';
+import { Account } from 'src/app/models/account.model';
+import { Obligatory } from 'src/app/models/obligatory.model';
+import { ObligatoryService } from 'src/app/services/obligatory.service';
 
 @Component({
   selector: 'app-obligatory-add',

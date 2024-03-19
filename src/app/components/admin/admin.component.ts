@@ -1,8 +1,8 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Account } from 'src/app/models/Account.model';
-import { AccountService } from 'src/app/services/accountService/account.service';
+import { Account } from 'src/app/models/account.model';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-admin',

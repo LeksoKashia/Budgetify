@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UserService } from '../userService/user.service';
-import { PiggyBank } from 'src/app/models/PiggyBank.model';
+import { PiggyBank } from 'src/app/models/piggyBank.model';
+import { Constants } from 'src/app/constants/constants';
 import { Observable } from 'rxjs';
 
 
@@ -9,9 +9,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PiggyBankService {
-  private apiServerUrl = 'http://localhost:8080';
-  
-  constructor(private http: HttpClient, private userService: UserService) {}
+  private apiServerUrl = Constants.apiUrl;
+
+  constructor(private http: HttpClient) {}
 
   addPiggyBank(piggyBank: PiggyBank): Observable<PiggyBank> {
     return this.http.post<PiggyBank>(`${this.apiServerUrl}/piggy/add`,piggyBank);

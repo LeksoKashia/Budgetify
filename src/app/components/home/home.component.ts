@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { User } from 'src/app/models/User.model';
-import { UserService } from 'src/app/services/userService/user.service';
+import { User } from 'src/app/models/user.model';
+import { UserService } from 'src/app/services/user.service';
 import { AccountsComponent } from '../accounts/accounts.component';
-import { AccountService } from 'src/app/services/accountService/account.service';
-import { Transaction } from 'src/app/models/Transaction.model';
+import { AccountService } from 'src/app/services/account.service';
+import { Transaction } from 'src/app/models/transaction.model';
 
 @Component({
   selector: 'app-home',

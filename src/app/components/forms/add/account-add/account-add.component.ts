@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { User } from 'src/app/models/User.model';
-import { Account } from 'src/app/models/Account.model';
-import { AccountService } from 'src/app/services/accountService/account.service';
-import { UserService } from 'src/app/services/userService/user.service';
+import { User } from 'src/app/models/user.model';
+import { Account } from 'src/app/models/account.model';
+import { AccountService } from 'src/app/services/account.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-account-add',

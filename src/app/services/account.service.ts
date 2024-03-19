@@ -1,17 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Account } from '../../models/Account.model';
+import { Account } from '../models/account.model';
 import { BehaviorSubject, Observable, Subscription, tap } from 'rxjs';
-import { UserService } from '../userService/user.service'; // Import the UserService to fetch user from localStorage
-import { PiggyBank } from '../../models/PiggyBank.model';
-import { Obligatory } from 'src/app/models/Obligatory.model';
-import { Transaction } from 'src/app/models/Transaction.model';
+import { PiggyBank } from '../models/piggyBank.model';
+import { Obligatory } from 'src/app/models/obligatory.model';
+import { Constants } from 'src/app/constants/constants';
+import { Transaction } from 'src/app/models/transaction.model';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
-  private apiServerUrl = 'http://localhost:8080';
+  private apiServerUrl = Constants.apiUrl;
   private accountsSubject: BehaviorSubject<Account[]> = new BehaviorSubject<Account[]>([]);
 
   constructor(private http: HttpClient, private userService: UserService) {}

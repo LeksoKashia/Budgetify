@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PiggyBank } from 'src/app/models/PiggyBank.model';
-import { PiggyBankService } from 'src/app/services/piggyBankService/piggy-bank.service';
+import { PiggyBank } from 'src/app/models/piggyBank.model';
+import { PiggyBankService } from 'src/app/services/piggy-bank.service';
 @Component({
   selector: 'app-piggy-bank-edit',
   templateUrl: './piggy-bank-edit.component.html',
@@ -21,6 +21,7 @@ export class PiggyBankEditComponent {
   ngOnInit(): void {
     this.initializeForm();
   }
+
   close(){
     this.closeForm.emit();
   }

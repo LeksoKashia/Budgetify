@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Obligatory } from 'src/app/models/Obligatory.model';
+import { Obligatory } from 'src/app/models/obligatory.model';
+import { Constants } from 'src/app/constants/constants';
 import { Observable } from 'rxjs';
 
 
@@ -8,8 +9,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ObligatoryService {
-  private apiServerUrl = 'http://localhost:8080';
-  
+  private apiServerUrl = Constants.apiUrl;
+
   constructor(private http: HttpClient) {}
 
   addObligatory(obligatory: Obligatory): Observable<Obligatory> {

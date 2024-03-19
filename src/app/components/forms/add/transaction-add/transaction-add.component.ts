@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { TransactionType } from 'src/app/enum/transactionType.enum';
-import { Account } from 'src/app/models/Account.model';
-import { ImageModel } from 'src/app/models/Image.model';
-import { Transaction } from 'src/app/models/Transaction.model';
-import { ImageService } from 'src/app/services/ImageService/image.service';
-import { TransactionService } from 'src/app/services/transactionService/transaction.service';
+import { Account } from 'src/app/models/account.model';
+import { ImageModel } from 'src/app/models/image.model';
+import { Transaction } from 'src/app/models/transaction.model';
+import { ImageService } from 'src/app/services/image.service';
+import { TransactionService } from 'src/app/services/transaction.service';
 
 @Component({
   selector: 'app-transaction-add',
