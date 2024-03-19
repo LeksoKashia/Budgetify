@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { TransactionType } from 'src/app/enum/transactionType.enum';
 import { Account } from 'src/app/models/Account.model';
 import { ImageModel } from 'src/app/models/Image.model';
 import { Transaction } from 'src/app/models/Transaction.model';
@@ -33,8 +34,12 @@ export class TransactionAddComponent {
   constructor(private formBuilder: FormBuilder, private transactionService: TransactionService, private imageService: ImageService) { }
 
   selectType(type: string) {
-    this.type = type === "expenses" ? "Expenses" : "Income";
-    this.expensesType = type === "expenses";
+    if (type === TransactionType.Expenses) {
+      this.type = "Expenses";
+    } else {
+      this.type = "Income";
+    }
+    this.expensesType = (type === TransactionType.Expenses);
   }
 
   onSubmit() {
