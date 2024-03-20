@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { PiggyBank } from 'src/app/models/piggyBank.model';
+import { PiggyBank } from 'src/app/models/piggy-bank.model';
 import { Constants } from 'src/app/constants/constants';
 import { Observable } from 'rxjs';
 

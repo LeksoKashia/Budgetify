@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PiggyBank } from 'src/app/models/piggyBank.model';
+import { PiggyBank } from 'src/app/models/piggy-bank.model';
 import { PiggyBankService } from 'src/app/services/piggy-bank.service';
 @Component({
   selector: 'app-piggy-bank-edit',

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Account } from 'src/app/models/account.model';
-import { PiggyBank } from 'src/app/models/piggyBank.model';
+import { PiggyBank } from 'src/app/models/piggy-bank.model';
 import { AccountService } from 'src/app/services/account.service';
 
 

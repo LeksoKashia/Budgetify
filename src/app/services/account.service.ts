@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Account } from '../models/account.model';
 import { BehaviorSubject, Observable, Subscription, tap } from 'rxjs';
-import { PiggyBank } from '../models/piggyBank.model';
+import { PiggyBank } from '../models/piggy-bank.model';
 import { Obligatory } from 'src/app/models/obligatory.model';
 import { Constants } from 'src/app/constants/constants';
 import { Transaction } from 'src/app/models/transaction.model';

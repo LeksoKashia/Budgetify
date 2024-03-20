@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Account } from 'src/app/models/account.model';
-import { PiggyBank } from 'src/app/models/piggyBank.model';
+import { PiggyBank } from 'src/app/models/piggy-bank.model';
 import { AccountService } from 'src/app/services/account.service';
 import { PiggyBankService } from 'src/app/services/piggy-bank.service';
 
