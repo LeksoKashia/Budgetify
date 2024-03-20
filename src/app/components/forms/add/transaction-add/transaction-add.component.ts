@@ -35,9 +35,9 @@ export class TransactionAddComponent {
 
   selectType(type: string) {
     if (type === TransactionType.Expenses) {
-      this.type = "Expenses";
+      this.type = TransactionType.Expenses;
     } else {
-      this.type = "Income";
+      this.type = TransactionType.Income;
     }
     this.expensesType = (type === TransactionType.Expenses);
   }
