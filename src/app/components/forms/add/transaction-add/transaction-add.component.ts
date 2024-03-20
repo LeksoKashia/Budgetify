@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
-import { TransactionType } from 'src/app/enum/transactionType.enum';
+import { TransactionType } from 'src/app/enum/transaction-type.enum.';
 import { Account } from 'src/app/models/account.model';
 import { ImageModel } from 'src/app/models/image.model';
 import { Transaction } from 'src/app/models/transaction.model';
@@ -52,24 +52,24 @@ export class TransactionAddComponent {
     };
 
     this.transactionService.addTransaction(transaction)
-      .subscribe(
-        (transactionResponse: Transaction) => {
-          for (let index = 0; index < this.transactionForm.value.files.length; index++) {
-            const path = this.transactionForm.value.files[index]
-            const fileName = path.split(/[\\\/]/).pop();
-            const image: ImageModel = {
-              transaction: transactionResponse,
-              fileName: fileName,
-              filePath: path
-            }
-
-            this.imageService.addImage(image).subscribe();
+    .subscribe(
+      (transactionResponse: Transaction) => {
+        this.transactionForm.value.files.forEach((path: string) => {
+          const fileName = path.split(/[\\\/]/).pop();
+          const image: ImageModel = {
+            transaction: transactionResponse,
+            fileName: fileName,
+            filePath: path
           }
-        },
-        (error) => {
-          console.error('Error adding transaction:', error);
-        }
-      );
+
+        this.imageService.addImage(image).subscribe();
+      });
+    },
+    (error) => {
+      console.error('Error adding transaction:', error);
+    }
+  );
+
   }
 
   get filesFormArray() {

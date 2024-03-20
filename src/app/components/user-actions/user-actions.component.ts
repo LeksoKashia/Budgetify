@@ -1,10 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { filter, switchMap } from 'rxjs/operators';
 import { Account } from 'src/app/models/account.model';
 import { PiggyBank } from 'src/app/models/piggyBank.model';
 import { AccountService } from 'src/app/services/account.service';
-import { PiggyBankService } from 'src/app/services/piggy-bank.service';
 
 
 @Component({
@@ -78,7 +75,6 @@ export class UserActionsComponent implements OnInit {
       this.showPiggy = !this.showPiggy;
       if (!piggy && !component) {
           this.getPiggyBanks();
-
       }
       return 0;
     }
