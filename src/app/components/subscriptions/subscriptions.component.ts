@@ -10,13 +10,12 @@ import { AccountService } from 'src/app/services/account.service';
 export class SubscriptionsComponent implements OnInit {
   subscriptions: Subscription[];
   filteredSubscriptions: Subscription[];
-  showOverlay: boolean = false;
-  searchTerm: string = '';
+  showOverlay = false;
+  searchTerm = '';
   showAddSubscription: boolean;
   showInfoSubscription: boolean;
   selectedSubscription: Subscription;
-  selectedDate: string = '';
-
+  selectedDate = '';
 
   constructor(private accountService: AccountService) {}
 
@@ -42,7 +41,7 @@ export class SubscriptionsComponent implements OnInit {
 
   fetchSubscriptions() {
     this.accountService.getSubscriptions().subscribe(
-      (subscriptions: any) => {
+      (subscriptions: Subscription[]) => {
         this.subscriptions = subscriptions;
         this.filterSubscriptions(); 
       },
@@ -62,7 +61,6 @@ export class SubscriptionsComponent implements OnInit {
         (!selectedDateObj || (selectedDateObj >= new Date(obligatory.startDate) && selectedDateObj <= new Date(obligatory.endDate)))
       );
     }
-
   }
 
   getFirstWord(str: string): string {

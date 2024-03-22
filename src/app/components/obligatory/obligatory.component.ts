@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Obligatory } from 'src/app/models/obligatory.model';
-import { ObligatoryService } from 'src/app/services/obligatory.service';
 import { AccountService } from 'src/app/services/account.service';
 
 @Component({
@@ -9,25 +8,25 @@ import { AccountService } from 'src/app/services/account.service';
   styleUrls: ['./obligatory.component.scss', '../subscriptions/subscriptions.component.scss']
 })
 export class ObligatoryComponent implements OnInit {
-  showOverlay: boolean = false;
-  searchTerm: string = '';
+  showOverlay = false;
+  searchTerm = '';
   obligatories: Obligatory[];
   filteredObligatories: Obligatory[];
-  selectedDate: string = '';
+  selectedDate = '';
 
-  constructor(private obligatoryService: ObligatoryService, private accountService: AccountService) {}
+  constructor(private accountService: AccountService) {}
 
   ngOnInit(): void {
     this.getObligatories();
   }
 
-  toggleOverlay(s?: string) {
+  toggleOverlay() {
     this.showOverlay = !this.showOverlay;
   }
 
   getObligatories() {
     this.accountService.getObligatories().subscribe(
-      (obligatories: any) => {
+      (obligatories: Obligatory[]) => {
         this.obligatories = obligatories;
         this.filteredObligatories = obligatories;
       },

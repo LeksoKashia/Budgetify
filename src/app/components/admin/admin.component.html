@@ -1,9 +1,7 @@
 <app-header></app-header>
 <section class="admin-section">
-
   <h1>Activate Card</h1>
   <hr>
-
   <table class="card-table">
     <thead>
       <tr>
@@ -19,7 +17,7 @@
             <span class="text" [ngClass]="{'red': card.isActive, 'green': !card.isActive}">
               {{ card.isActive ? 'Deactivate' : 'Activate' }}
             </span>
-          </button>          
+          </button>
         </td>
       </tr>
     </tbody>

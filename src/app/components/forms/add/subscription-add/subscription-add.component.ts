@@ -1,7 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserService } from 'src/app/services/user.service';
-import { AccountService } from 'src/app/services/account.service';
 import { Account } from 'src/app/models/account.model';
 import { Subscription } from 'src/app/models/subscription.model';
 import { SubscriptionService } from 'src/app/services/subscription.service';
@@ -18,8 +16,7 @@ export class SubscriptionAddComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private subscriptionService: SubscriptionService,
-    private accountService: AccountService
+    private subscriptionService: SubscriptionService
   ) {
     this.subscriptionForm = this.formBuilder.group({
       title: ['', Validators.required],
@@ -37,32 +34,33 @@ export class SubscriptionAddComponent {
 
   onSubmit() {
     this.closeForm.emit();
-    if (this.subscriptionForm.valid) {
-      const activeCard: Account= JSON.parse(localStorage.getItem('activeCard'));
-      if (activeCard && activeCard.id) {
-        const subscriptionData: Subscription = {
-          title: this.subscriptionForm.value.title,
-          categories: this.subscriptionForm.value.categories,
-          amount: this.subscriptionForm.value.amount,
-          startDate: this.subscriptionForm.value.startDate,
-          endDate: this.subscriptionForm.value.endDate,
-          description: this.subscriptionForm.value.description,
-          account: activeCard
-        };
-
-        this.subscriptionService.addSubscription(subscriptionData).subscribe(
-          (newSubscription: Subscription) => {
-            console.log('Subscription added successfully:', newSubscription);
-          },
-          (error) => {
-            console.error('Error adding subscription:', error);
-          }
-        );
-      } else {
-        console.error('User information not found.');
-      }
-    } else {
+    if (this.subscriptionForm.invalid) {
       console.log('Please fill in all fields.');
+      return;
+    }
+
+    const activeCard: Account= JSON.parse(localStorage.getItem('activeCard'));
+    if (activeCard && activeCard.id) {
+      const subscriptionData: Subscription = {
+        title: this.subscriptionForm.value.title,
+        categories: this.subscriptionForm.value.categories,
+        amount: this.subscriptionForm.value.amount,
+        startDate: this.subscriptionForm.value.startDate,
+        endDate: this.subscriptionForm.value.endDate,
+        description: this.subscriptionForm.value.description,
+        account: activeCard
+      };
+
+      this.subscriptionService.addSubscription(subscriptionData).subscribe(
+        (newSubscription: Subscription) => {
+          console.log('Subscription added successfully:', newSubscription);
+        },
+        (error) => {
+          console.error('Error adding subscription:', error);
+        }
+      );
+    } else {
+      console.error('User information not found.');
     }
   }
 }

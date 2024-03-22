@@ -1,5 +1,5 @@
 <div class="types">
-  <div (click)="selectType('expenses')" [ngClass]="{'blur': !expensesType}">
+  <div (click)="selectType(transactionType.Expenses)" [ngClass]="{'blur': !expensesType}">
     <a class="arrow arrow-up">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
         <path
@@ -9,7 +9,7 @@
     </a>
     <p>Expenses</p>
   </div>
-  <div (click)="selectType('income')" [ngClass]="{'blur': expensesType}">
+  <div (click)="selectType(transactionType.Income)" [ngClass]="{'blur': expensesType}">
 
     <a class="arrow arrow-down">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
@@ -74,10 +74,8 @@
 
         <input #addFile type="file" [formControlName]="i" class="custom-input" style="display: none;"
           (change)="handleFileInput($event, i)">
-
       </div>
     </div>
-
   </div>
 
   <div class="buttons">

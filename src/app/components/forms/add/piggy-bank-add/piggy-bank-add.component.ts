@@ -4,7 +4,6 @@ import { Account } from 'src/app/models/account.model';
 import { PiggyBank } from 'src/app/models/piggy-bank.model';
 import { AccountService } from 'src/app/services/account.service';
 import { PiggyBankService } from 'src/app/services/piggy-bank.service';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-piggy-bank-add',
@@ -50,30 +49,31 @@ export class PiggyBankAddComponent implements OnInit {
 
   onSubmit() {
     this.closeForm.emit();
-    if (this.piggyForm.valid) {
-      const selectedAccount = this.accounts.find(account => account.id == this.piggyForm.value.selectedAccount);
 
-      if (selectedAccount) {
-        const piggyBank: PiggyBank = {
-          account: selectedAccount,
-          goal: this.piggyForm.value.goal,
-          goalAmount: this.piggyForm.value.goalAmount,
-          savedAmount: this.piggyForm.value.savedAmount
-        };
-
-        this.piggyBankService.addPiggyBank(piggyBank).subscribe(
-          (newPiggyBank: PiggyBank) => {
-            console.log('Piggy bank added successfully:', newPiggyBank);
-          },
-          (error) => {
-            console.error('Error adding piggy bank:', error);
-          }
-        );
-      } else {
-        console.error('Selected account not found.');
-      }
-    } else {
+    if (this.piggyForm.invalid) {
       console.log('Please fill in all fields.');
+      return;
+    }
+
+    const selectedAccount = this.accounts.find(account => account.id == this.piggyForm.value.selectedAccount);
+    if (selectedAccount) {
+      const piggyBank: PiggyBank = {
+        account: selectedAccount,
+        goal: this.piggyForm.value.goal,
+        goalAmount: this.piggyForm.value.goalAmount,
+        savedAmount: this.piggyForm.value.savedAmount
+      };
+
+      this.piggyBankService.addPiggyBank(piggyBank).subscribe(
+        (newPiggyBank: PiggyBank) => {
+          console.log('Piggy bank added successfully:', newPiggyBank);
+        },
+        (error) => {
+          console.error('Error adding piggy bank:', error);
+        }
+      );
+    } else {
+      console.error('Selected account not found.');
     }
   }
 }

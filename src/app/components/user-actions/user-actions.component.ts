@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { TransactionType } from 'src/app/enum/transaction-type.enum';
 import { Account } from 'src/app/models/account.model';
 import { PiggyBank } from 'src/app/models/piggy-bank.model';
 import { AccountService } from 'src/app/services/account.service';
@@ -10,22 +11,24 @@ import { AccountService } from 'src/app/services/account.service';
   styleUrls: ['./user-actions.component.scss']
 })
 export class UserActionsComponent implements OnInit {
-
   piggyBanks: PiggyBank[];
-  showOverlay: boolean = false;
+  showOverlay = false;
   formDisplayText: string;
-  showAccountAdd: boolean = false;
-  showTransactionAdd: boolean = false;
-  showPiggyBankAdd: boolean = false;
-  showPiggy: boolean = false;
+  showAccountAdd = false;
+  showTransactionAdd = false;
+  showPiggyBankAdd = false;
+  showPiggy = false;
   selectedPiggy: any;
-  editPiggyLayout: boolean = false;
-  addMoneyToPiggy: boolean = false;
+  editPiggyLayout = false;
+  addMoneyToPiggy = false;
   activeCard: Account;
+  readonly transactionType = TransactionType;
+
   @Output() reInitialiseAccount = new EventEmitter<void>();
   @Output() searchEmit = new EventEmitter<string>();
 
   constructor(private accountService: AccountService) { }
+
   ngOnInit(): void {
     const storedCard = localStorage.getItem('activeCard');
     this.activeCard = JSON.parse(storedCard);
@@ -58,7 +61,6 @@ export class UserActionsComponent implements OnInit {
   }
 
   togglePiggy(piggy?: any, component?: string): number {
-   
     if (component === 'info') {
       this.editPiggyLayout = false;
       this.addMoneyToPiggy = false;
@@ -80,7 +82,7 @@ export class UserActionsComponent implements OnInit {
     }
   }
 
-  addToPiggy(piggyBank?: PiggyBank) {
+  addToPiggy() {
     this.editPiggyLayout = false;
     this.addMoneyToPiggy = !this.addMoneyToPiggy;
   }
@@ -93,5 +95,4 @@ export class UserActionsComponent implements OnInit {
   reInitialise() {
     this.reInitialiseAccount.emit();
   }
-
 }

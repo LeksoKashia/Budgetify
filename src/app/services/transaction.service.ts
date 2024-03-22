@@ -4,7 +4,6 @@ import { Transaction } from 'src/app/models/transaction.model';
 import { Constants } from 'src/app/constants/constants';
 import { Observable } from 'rxjs';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -23,5 +22,4 @@ export class TransactionService {
   deleteAccount(transactionId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiServerUrl}/transaction/delete/${transactionId}`);
   }
-
 }

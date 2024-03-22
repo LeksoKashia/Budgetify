@@ -10,12 +10,10 @@ import { PiggyBankService } from 'src/app/services/piggy-bank.service';
   styleUrls: ['./piggy-bank-info.component.scss', '../account-info/account-info.component.scss', '../../../user-actions/user-actions.component.scss']
 })
 export class PiggyBankInfoComponent implements OnInit{
-
   activeCard : Account;
   @Input() piggyBankInfo : PiggyBank;
   @Output() closeForm = new EventEmitter<void>();
   @Output() reInitialise = new EventEmitter<void>();
-
 
   ngOnInit(): void {
     this.activeCard= JSON.parse(localStorage.getItem('activeCard'));

@@ -1,10 +1,8 @@
 <app-header></app-header>
 <section style="display: flex; gap: 100px; padding: 0 35px 0 20px;">
-
   <div class="accounts">
     <app-accounts></app-accounts>
   </div>
-
 
   <div class="main">
     <div class="search-container">
@@ -19,11 +17,6 @@
       <input type="date" class="date-input" [(ngModel)]="selectedDate" (change)="filterObligatories()">
     </div>
 
-
-
-
-
-
     <div *ngIf="filteredObligatories.length > 0" class="obligatories">
       <div *ngFor="let obligatory of filteredObligatories" class="obligatory">
         <div class="obligatory-head">
@@ -34,16 +27,11 @@
       </div>
     </div>
 
-
-
-    <p style="padding-left: 3px;" *ngIf="filteredObligatories.length == 0">No obligatories found.</p>
-
+    <p style="padding-left: 3px;" *ngIf="filteredObligatories.length === 0">No obligatories found.</p>
   </div>
-
 
   <div class="user-actions">
     <div class="actions">
-
 
       <div class="type type-add">
         <a class="arrow add" (click)="toggleOverlay()">
@@ -65,8 +53,6 @@
         <p class="type-text">Add Transaction</p>
       </div>
 
-
-
       <div *ngIf="showOverlay" class="left-overlay" (click)="toggleOverlay()"></div>
       <div *ngIf="showOverlay" class="right-overlay">
 
@@ -77,14 +63,8 @@
           </a>
         </div>
 
-        <app-obligatory-add (closeForm)="toggleOverlay('kaito')"></app-obligatory-add>
-
+        <app-obligatory-add (closeForm)="toggleOverlay()"></app-obligatory-add>
       </div>
-
-
     </div>
   </div>
-
-
-
 </section>

@@ -15,7 +15,7 @@ import { AuthState } from '../../redux/reducers/auth.reducer';
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  passwordHidden: boolean = true;
+  passwordHidden = true;
 
   constructor(private store: Store<AuthState>, private formBuilder: FormBuilder, private userService: UserService, private authService: AuthService,private router: Router) {
     this.loginForm = this.formBuilder.group({
@@ -44,5 +44,4 @@ export class LoginComponent {
   togglePasswordVisibility() {
     this.passwordHidden = !this.passwordHidden;
   }
-
 }

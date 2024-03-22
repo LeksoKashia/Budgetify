@@ -4,7 +4,6 @@ import { Obligatory } from 'src/app/models/obligatory.model';
 import { Constants } from 'src/app/constants/constants';
 import { Observable } from 'rxjs';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -24,5 +23,4 @@ export class ObligatoryService {
   deleteAccount(obligatoryId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiServerUrl}/obligatory/delete/${obligatoryId}`);
   }
-
 }

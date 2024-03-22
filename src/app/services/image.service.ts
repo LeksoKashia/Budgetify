@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { Constants } from 'src/app/constants/constants';
 import { ImageModel } from 'src/app/models/image.model';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -24,5 +23,4 @@ export class ImageService {
   deleteAccount(imageId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiServerUrl}/image/delete/${imageId}`);
   }
-
 }

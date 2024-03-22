@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PiggyBank } from 'src/app/models/piggy-bank.model';
 import { PiggyBankService } from 'src/app/services/piggy-bank.service';
@@ -7,7 +7,7 @@ import { PiggyBankService } from 'src/app/services/piggy-bank.service';
   templateUrl: './piggy-bank-edit.component.html',
   styleUrls: ['./piggy-bank-edit.component.scss', '../../add/account-add/account-add.component.scss']
 })
-export class PiggyBankEditComponent {
+export class PiggyBankEditComponent implements OnInit {
   @Input() piggyInfo : PiggyBank;
   @Output() closeForm = new EventEmitter<void>();
 

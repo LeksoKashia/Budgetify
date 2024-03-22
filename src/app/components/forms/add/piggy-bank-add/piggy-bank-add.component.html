@@ -1,7 +1,5 @@
 <form [formGroup]="piggyForm" (ngSubmit)="onSubmit()" class="custom-form">
   <div class="form-div">
-    
-
     <div class="form-group">
       <label for="goal" class="input-label">Goal:</label>
       <input type="text" id="goal" formControlName="goal" class="custom-input" placeholder="Enter goal">
@@ -19,9 +17,7 @@
         <option *ngFor="let account of accounts" [value]="account.id">{{ account.title }}</option>
       </select>
     </div>
-    
   </div>
-
   <div class="buttons">
     <button type="button" class="btn-secondary" (click)="close()">Cancel</button>
     <button type="submit" [disabled]="!piggyForm.valid" class="btn btn-primary">Save</button>
