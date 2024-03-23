@@ -1,5 +1,5 @@
 <section class="main">
-  <h2 *ngIf="accounts.length == 0" class="noacc">
+  <h2 *ngIf="accounts.length === 0" class="noacc">
     No Accounts <i class="fa-regular fa-credit-card"></i>
   </h2>
   <div *ngFor="let account of accounts">

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'src/app/models/subscription.model';
 import { SubscriptionService } from 'src/app/services/subscription.service';
@@ -8,7 +8,7 @@ import { SubscriptionService } from 'src/app/services/subscription.service';
   templateUrl: './subscription-edit.component.html',
   styleUrls: ['./subscription-edit.component.scss', '../../add/account-add/account-add.component.scss']
 })
-export class SubscriptionEditComponent {
+export class SubscriptionEditComponent implements OnInit {
   @Input() subscriptionInfo!: Subscription;
   @Output() closeForm = new EventEmitter<void>();
 
@@ -22,6 +22,7 @@ export class SubscriptionEditComponent {
   ngOnInit(): void {
     this.initializeForm();
   }
+
   close(){
     this.closeForm.emit();
   }
@@ -40,6 +41,7 @@ export class SubscriptionEditComponent {
     if (!this.subscriptionForm.valid) {
       return;
     }
+  
     const updatedSubscription: Subscription = {
       id: this.subscriptionInfo.id,
       title: this.subscriptionForm.value.title,
@@ -60,5 +62,4 @@ export class SubscriptionEditComponent {
         }
       );
   }
-
 }

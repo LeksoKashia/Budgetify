@@ -6,5 +6,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./transaction-edit.component.scss']
 })
 export class TransactionEditComponent {
-
 }

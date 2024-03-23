@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { User } from 'src/app/models/user.model';
-import { UserService } from 'src/app/services/user.service';
 import { AccountsComponent } from '../accounts/accounts.component';
 import { AccountService } from 'src/app/services/account.service';
 import { Transaction } from 'src/app/models/transaction.model';
+import { TransactionType } from 'src/app/enum/transaction-type.enum';
 
 @Component({
   selector: 'app-home',
@@ -14,8 +13,9 @@ export class HomeComponent implements OnInit {
   @ViewChild('accountsComponent', { static: false }) accountsComponent: AccountsComponent;
   transactions: Transaction[] = [];
   filteredTransactions : Transaction[] = []
-  searchTerm: string = '';
-  selectedDate: string = ''; 
+  searchTerm = '';
+  selectedDate = '';
+  readonly transactionType = TransactionType;
 
   ngOnInit(): void {
     this.fetchTransactions();
@@ -59,10 +59,10 @@ export class HomeComponent implements OnInit {
   }
 
   filter(eventType: string) {
-    if (eventType === 'Expenses') {
-      this.filteredTransactions = this.transactions.filter(transaction => transaction.type === 'Expenses');
-    } else if (eventType === 'Income') {
-      this.filteredTransactions = this.transactions.filter(transaction => transaction.type === 'Income');
+    if (eventType === TransactionType.Expenses) {
+      this.filteredTransactions = this.transactions.filter(transaction => transaction.type === TransactionType.Expenses);
+    } else if (eventType === TransactionType.Income) {
+      this.filteredTransactions = this.transactions.filter(transaction => transaction.type === TransactionType.Income);
     } else {
       this.filteredTransactions = this.transactions;
     }

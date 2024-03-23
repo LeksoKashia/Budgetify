@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Account } from '../models/account.model';
-import { BehaviorSubject, Observable, Subscription, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { PiggyBank } from '../models/piggy-bank.model';
 import { Obligatory } from 'src/app/models/obligatory.model';
 import { Constants } from 'src/app/constants/constants';
 import { Transaction } from 'src/app/models/transaction.model';
 import { UserService } from './user.service';
+import { Subscription } from '../models/subscription.model';
 
 @Injectable({
   providedIn: 'root'

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Account } from 'src/app/models/account.model';
 import { PiggyBank } from 'src/app/models/piggy-bank.model';
@@ -10,7 +10,7 @@ import { PiggyBankService } from 'src/app/services/piggy-bank.service';
   templateUrl: './add-money-to-piggy.component.html',
   styleUrls: ['./add-money-to-piggy.component.scss', '../../add/account-add/account-add.component.scss']
 })
-export class AddMoneyToPiggyComponent {
+export class AddMoneyToPiggyComponent implements OnInit {
   @Input() piggyInfo: PiggyBank;
   @Output() closeForm = new EventEmitter<void>();
   @Output() reInitialise = new EventEmitter<void>();
@@ -68,7 +68,6 @@ export class AddMoneyToPiggyComponent {
 
   updateAccountBalance(): void {
     const activeCard = JSON.parse(localStorage.getItem('activeCard') || '{}') as Account;
-
     const updatedAccount = {
       id: activeCard.id,
       title: activeCard.title,

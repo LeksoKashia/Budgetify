@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
-import { TransactionType } from 'src/app/enum/transaction-type.enum.';
+import { TransactionType } from 'src/app/enum/transaction-type.enum';
 import { Account } from 'src/app/models/account.model';
 import { ImageModel } from 'src/app/models/image.model';
 import { Transaction } from 'src/app/models/transaction.model';
@@ -13,13 +13,13 @@ import { TransactionService } from 'src/app/services/transaction.service';
   styleUrls: ['./transaction-add.component.scss']
 })
 export class TransactionAddComponent {
-  type: string = 'Expenses';
-  expensesType: boolean = true;
+  type: TransactionType;
+  expensesType = true;
   fileSelected: boolean[] = [];
   changedInputs: string[] = [];
+  readonly transactionType = TransactionType;
 
   @Output() closeForm = new EventEmitter<void>();
-
 
   transactionForm: FormGroup = this.formBuilder.group({
     title: ['', Validators.required],

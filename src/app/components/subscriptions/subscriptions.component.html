@@ -1,10 +1,8 @@
 <app-header></app-header>
 <section style="display: flex; gap: 100px; padding: 0 35px 0 20px;">
-
   <div class="accounts">
     <app-accounts></app-accounts>
   </div>
-
 
   <div class="main">
     <div class="search-container">
@@ -20,8 +18,6 @@
       <p>Filter by date: </p>
       <input type="date" class="date-input" [(ngModel)]="selectedDate" (change)="filterSubscriptions()">
     </div>
-
-
 
     <div *ngIf="filteredSubscriptions.length > 0; else noSubscriptions" class="subscriptions-container">
       <div *ngFor="let subscription of filteredSubscriptions" >
@@ -44,10 +40,8 @@
     <ng-template #noSubscriptions>
       <p class="no-subscriptions">No subscriptions found.</p>
     </ng-template>
-    
 
   </div>
-
 
   <div class="user-actions">
     <div class="actions">
@@ -72,7 +66,6 @@
         <p class="type-text">Add Transaction</p>
       </div>
 
-
       <div *ngIf="showOverlay" class="left-overlay" (click)="toggleOverlay()"></div>
       <div *ngIf="showOverlay" class="right-overlay">
 
@@ -90,12 +83,8 @@
         <app-subscription-info *ngIf="showInfoSubscription" (closeOverlay)="toggleOverlay()"
           [subscription]="selectedSubscription"></app-subscription-info>
 
-
       </div>
 
     </div>
   </div>
-
-
-
 </section>

@@ -4,7 +4,6 @@ import { PiggyBank } from 'src/app/models/piggy-bank.model';
 import { Constants } from 'src/app/constants/constants';
 import { Observable } from 'rxjs';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -24,5 +23,4 @@ export class PiggyBankService {
   deleteAccount(piggyId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiServerUrl}/piggy/delete/${piggyId}`);
   }
-
 }

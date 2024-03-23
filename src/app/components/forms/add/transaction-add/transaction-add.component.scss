@@ -3,9 +3,11 @@
   overflow-y: auto;
 
 }
+
 .title-form-div{
   margin-top: 5px !important;
 }
+
 .types{
   margin-bottom: 30px;
   display: flex;
@@ -33,6 +35,7 @@
 p{
   margin: 0;
 }
+
 .arrow{
   width:35px;
   height:35px;
@@ -102,11 +105,13 @@ p{
   display: flex;
   gap: 20px;
 }
+
 .btn-secondary{
   background-color: transparent;
   color: rgba(55, 55, 55, 1);
   border: none;
   }
+
 .btn-primary{
   background-color: rgba(185, 226, 230, 1);
   color: rgba(55, 55, 55, 1);

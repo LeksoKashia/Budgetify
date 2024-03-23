@@ -10,8 +10,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class HeaderComponent implements OnInit {
   user: User;
-  showLogout: boolean = false;
-  showConfirmationModal: boolean = false;
+  showLogout = false;
+  showConfirmationModal = false;
 
   constructor(private authService: AuthService, private userService: UserService) {}
 
