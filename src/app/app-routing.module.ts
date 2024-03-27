@@ -7,10 +7,12 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { AdminComponent } from './components/admin/admin.component';
 import { SubscriptionsComponent } from './components/subscriptions/subscriptions.component';
 import { ObligatoryComponent } from './components/obligatory/obligatory.component';
+import { CategoriesComponent } from './components/categories/categories.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'categories', component: CategoriesComponent, canActivate: [AuthGuard] },
   { path: 'subscriptions', component: SubscriptionsComponent, canActivate: [AuthGuard] },
   { path: 'obligatory', component: ObligatoryComponent, canActivate: [AuthGuard] },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },

@@ -8,6 +8,7 @@ import { Constants } from 'src/app/constants/constants';
 import { Transaction } from 'src/app/models/transaction.model';
 import { UserService } from './user.service';
 import { Subscription } from '../models/subscription.model';
+import { Category } from '../models/category.model';
 
 @Injectable({
   providedIn: 'root'
@@ -88,6 +89,11 @@ export class AccountService {
   getObligatories(): Observable<Obligatory[]> {
     const activeCard: Account = JSON.parse(localStorage.getItem('activeCard'));
     return this.http.get<Obligatory[]>(`${this.apiServerUrl}/account/accounts/obligatories/${activeCard.id}`);
+  }
+
+  getCategories(): Observable<Category[]> {
+    const activeCard: Account = JSON.parse(localStorage.getItem('activeCard'));
+    return this.http.get<Category[]>(`${this.apiServerUrl}/account/accounts/categories/${activeCard.id}`);
   }
   
   updateAccounts(accounts: Account[]): void {

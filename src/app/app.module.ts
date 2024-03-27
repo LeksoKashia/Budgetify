@@ -1,6 +1,7 @@
 import { NgModule, isDevMode } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatChipsModule } from '@angular/material/chips';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -33,6 +34,9 @@ import { SubscriptionInfoComponent } from './components/forms/info/subscription-
 import { SubscriptionEditComponent } from './components/forms/edit/subscription-edit/subscription-edit.component';
 import { ObligatoryAddComponent } from './components/forms/add/obligatory-add/obligatory-add.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CategoriesComponent } from './components/categories/categories.component';
+import { CategoryAddComponent } from './components/forms/add/category-add/category-add.component';
+import { CategoryEditComponent } from './components/forms/edit/category-edit/category-edit.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +64,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SubscriptionInfoComponent,
     SubscriptionEditComponent,
     ObligatoryAddComponent,
-    TransactionAddComponent
+    TransactionAddComponent,
+    CategoriesComponent,
+    CategoryAddComponent,
+    CategoryEditComponent
   ],
   imports: [
     RouterModule,
@@ -68,6 +75,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    MatChipsModule,
     HttpClientModule,
     StoreModule.forRoot({ 
       auth: authReducer,

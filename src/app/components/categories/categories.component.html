@@ -1,0 +1,92 @@
+<app-header></app-header>
+<section>
+  <div class="main">
+    <div class="search-container">
+      <button class="icon-search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+      <input type="text" class="search" placeholder="Search" [(ngModel)]="searchTerm" (input)="filterCategories()">
+    </div>
+    <div *ngIf="filteredCategories.length === 0">
+      <p style="margin-top: 20px;">No categories found</p>
+    </div>
+    <div *ngIf="filteredCategories.length > 0" class="categories">
+      <div *ngFor="let category of filteredCategories" class="category"
+        [ngStyle]="{'border': category.type === 'Income' ? '2px solid rgba(33, 194, 6, 1)' : '2px solid rgba(238, 63, 25, 1)'}">
+        <p>{{category.name}}</p>
+        <div>
+          <i class="fa-solid fa-pen" (click)="setCurrentCategory(category); toggleOverlay12()"></i>
+          <i class="fa-solid fa-trash" (click)="deleteCategory(category.id)"></i>
+        </div>
+
+        <div *ngIf="showOverlay1" class="left-overlay" (click)="toggleOverlay12()"></div>
+        <div *ngIf="showOverlay1" class="right-overlay">
+          <div class="head-overlay">
+            <h1 class="title-overlay">Edit Category </h1>
+            <a (click)="toggleOverlay12()" class="close-overlay">
+              <img src="../../../assets/close.png" alt="" width="30px" height="30px">
+            </a>
+          </div>
+          <app-category-edit [currentCategory]="currentCategory" (closeForm)="toggleOverlay12()"></app-category-edit>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+
+  <div class="user-actions">
+    <div class="actions">
+
+
+      <div class="type">
+        <a class="arrow arrow-down" (click)="filterByType('Income')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
+            <path
+              d="M7.29289 17.9925C7.68342 18.383 8.31658 18.383 8.70711 17.9925L15.0711 11.6285C15.4616 11.238 15.4616 10.6049 15.0711 10.2143C14.6805 9.82381 14.0474 9.82381 13.6569 10.2143L8 15.8712L2.34315 10.2143C1.95262 9.82381 1.31946 9.82381 0.928932 10.2143C0.538408 10.6049 0.538408 11.238 0.928932 11.6285L7.29289 17.9925ZM7 0.2854L7 17.2854H9L9 0.2854L7 0.2854Z"
+              fill="white" />
+          </svg>
+        </a>
+        <p class="type-text">Income</p>
+      </div>
+
+      <div class="type">
+        <a class="arrow arrow-up" (click)="filterByType('Expenses')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="19" viewBox="0 0 16 19" fill="none">
+            <path
+              d="M8.70711 1.07829C8.31658 0.687769 7.68342 0.687769 7.29289 1.07829L0.928932 7.44226C0.538408 7.83278 0.538408 8.46594 0.928932 8.85647C1.31946 9.24699 1.95262 9.24699 2.34315 8.85647L8 3.19961L13.6569 8.85647C14.0474 9.24699 14.6805 9.24699 15.0711 8.85647C15.4616 8.46594 15.4616 7.83278 15.0711 7.44226L8.70711 1.07829ZM9 18.7854L9 1.7854H7L7 18.7854H9Z"
+              fill="white" />
+          </svg>
+        </a>
+        <p class="type-text">Expenses</p>
+      </div>
+
+      <div class="type type-add">
+        <a class="arrow add" (click)="toggleOverlay()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M7.38 17.4533V10.4933H0.5V7.61334H7.38V0.653345H10.42V7.61334H17.3V10.4933H10.42V17.4533H7.38Z"
+              fill="#86C9CF" />
+          </svg>
+        </a>
+        <p class="type-text">Add Category</p>
+      </div>
+
+      <div *ngIf="showOverlay" class="left-overlay" (click)="toggleOverlay()"></div>
+      <div *ngIf="showOverlay" class="right-overlay">
+
+        <div class="head-overlay">
+          <h1 class="title-overlay">Add Obligatory </h1>
+          <a (click)="toggleOverlay()" class="close-overlay">
+            <img src="../../../assets/close.png" alt="" width="30px" height="30px">
+          </a>
+        </div>
+
+        <app-category-add (closeForm)="toggleOverlay()"></app-category-add>
+      </div>
+
+
+
+    </div>
+  </div>
+</section>

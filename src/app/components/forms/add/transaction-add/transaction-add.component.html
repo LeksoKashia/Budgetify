@@ -29,10 +29,18 @@
     </div>
 
     <div class="form-group">
-      <label for="categories" class="input-label">Categories:</label>
-      <input type="text" id="categories" formControlName="categories" class="custom-input"
-        placeholder="Enter categories">
+      <div class="container"
+        >
+        <mat-chip-listbox #chipList aria-label="Select categories" [multiple]="true"
+          (selectionChange)="onSelectionChange($event)">
+          <mat-chip-option *ngFor="let category of categories" [value]="category.id" (click)="opa(category.id)">
+            {{ category.name }}
+          </mat-chip-option>
+        </mat-chip-listbox>
+      </div>
     </div>
+
+
 
     <div class="form-group">
       <label for="amount" class="input-label">Amount:</label>
