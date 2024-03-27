@@ -31,7 +31,6 @@ export class CategoryAddComponent {
     this.expensesType = (type === TransactionType.Expenses);
   }
 
-
   onSubmit() {
     this.closeForm.emit();
     const activeCard: Account = JSON.parse(localStorage.getItem('activeCard'));
@@ -43,15 +42,11 @@ export class CategoryAddComponent {
 
     console.log(this.type);
     
-
     this.categoryService.addCategory(category)
     .subscribe(
-      (response: any) => {
-      });
+      (response: any) => {});
     (error) => {
       console.error('Error adding transaction:', error);
     }
   }
-  
-
 }

@@ -27,6 +27,7 @@ export class CategoriesComponent implements OnInit {
     this.showOverlay = !this.showOverlay;
     this.getCategories();
   }
+  
   setCurrentCategory(category: any) {
     this.currentCategory = category;
   }
@@ -34,8 +35,8 @@ export class CategoriesComponent implements OnInit {
   toggleOverlay12(cagtegory? :Category) {
     this.showOverlay1 = !this.showOverlay1;
     this.getCategories();
-
   }
+
   getCategories() {
     this.accountService.getCategories().subscribe(
       (categories: Category[]) => {

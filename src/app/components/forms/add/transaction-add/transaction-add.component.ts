@@ -6,13 +6,8 @@ import { ImageModel } from 'src/app/models/image.model';
 import { Transaction } from 'src/app/models/transaction.model';
 import { ImageService } from 'src/app/services/image.service';
 import { TransactionService } from 'src/app/services/transaction.service';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { Observable } from 'rxjs';
 import { Category } from 'src/app/models/category.model';
 import { AccountService } from 'src/app/services/account.service';
-import { MatChipListboxChange } from '@angular/material/chips';
-
 
 
 @Component({

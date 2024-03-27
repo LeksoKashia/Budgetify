@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TransactionType } from 'src/app/enum/transaction-type.enum';
-import { Account } from 'src/app/models/account.model';
 import { Category } from 'src/app/models/category.model';
 import { CategoryService } from 'src/app/services/category.service';
 
@@ -16,9 +15,7 @@ export class CategoryEditComponent implements OnInit{
   readonly transactionType = TransactionType;
   type: TransactionType;
   @Output() closeForm = new EventEmitter<void>();
-
   categoryForm!: FormGroup;
-
 
   constructor(private formBuilder: FormBuilder, private categoryService:CategoryService) { }
   ngOnInit(): void {
@@ -37,8 +34,6 @@ export class CategoryEditComponent implements OnInit{
       name: [this.currentCategory.name, Validators.required]
     });
   }
-
- 
 
   selectType(type: string) {
     if (type === TransactionType.Expenses) {
@@ -59,7 +54,6 @@ export class CategoryEditComponent implements OnInit{
     };
 
     console.log(this.type);
-    
 
     this.categoryService.addCategory(category)
     .subscribe(
