@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { User } from 'src/app/models/user.model';
+import { selectUser } from 'src/app/redux/selectors/user.selectors';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -9,14 +12,14 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  user: User;
+  user$: Observable<User>;
   showLogout = false;
   showConfirmationModal = false;
 
-  constructor(private authService: AuthService, private userService: UserService) {}
+  constructor(private authService: AuthService, private userService: UserService,  private store: Store) {}
 
   ngOnInit(): void {
-    this.user = this.userService.getUserInfoFromLocalStorage();
+    this.user$ = this.store.pipe(select(selectUser));
   }
 
   show() {

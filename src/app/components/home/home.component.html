@@ -12,19 +12,27 @@
       </button>
       <input type="text" class="search" placeholder="Search" [(ngModel)]="searchTerm" (input)="filterTransactions()">
     </div>
-    
+
     <div class="date">
       <p>Filter by date:</p>
       <input type="date" class="date-input" [(ngModel)]="selectedDate" (change)="filterTransactions()">
     </div>
 
-    <div *ngIf="filteredTransactions.length > 0; else noSubscriptions" class="transactions-container">
-      <div *ngFor="let transaction of filteredTransactions">
+    <div *ngIf="filteredTransactions.length > 0; else noTransactions" class="transactions-container">
+      <div *ngFor="let transaction of filteredTransactions; let i = index">
         <div class="transaction">
           <div class="transaction-category">
-            <button class="category">
-              {{ getFirstWord(transaction.categories) }}
+            <button *ngIf="categoriesArray[i] == undefined" class="category unavaliable" (click)="toggleInfo(transaction)">
+              No categories
             </button>
+
+            <button *ngIf="categoriesArray[i] != undefined" class="category" (click)="toggleInfo(transaction)">
+              {{categoriesArray[i][0] }}
+            </button>
+          </div>
+          <div *ngIf="showOverlay" class="left-overlay" (click)="toggleInfo()"></div>
+          <div *ngIf="showOverlay" class="right-overlay">
+            <app-transaction-info [transaction]="currentTransaction" (closeForm)="toggleInfo()" [categories]="categoriesArray[i]"></app-transaction-info>
           </div>
           <div class="transaction-info">
 
@@ -57,7 +65,7 @@
         </div>
       </div>
     </div>
-    <ng-template #noSubscriptions>
+    <ng-template #noTransactions>
       <p class="no-transactions">No transactions found.</p>
     </ng-template>
   </div>

@@ -6,7 +6,7 @@ export interface AuthState {
 }
 
 const initialState: AuthState = {
-  loggedIn: true
+  loggedIn: false
 };
 
 export const authReducer = createReducer(

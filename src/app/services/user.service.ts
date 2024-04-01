@@ -3,6 +3,12 @@ import { User } from '../models/user.model';
 import { Constants } from 'src/app/constants/constants';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { UserState } from '../redux/reducers/user.reducer';
+import * as UserActions from '../redux/actions/user.actions';
+import { selectUser } from '../redux/selectors/user.selectors';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +16,7 @@ import { Observable } from 'rxjs';
 export class UserService {
   private apiServerUrl = Constants.apiUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,  private store: Store<UserState>) {}
 
   public getUser(email: string): Observable<User> {
     return this.http.get<User>(`${this.apiServerUrl}/user/find/${email}`);
@@ -28,11 +34,11 @@ export class UserService {
   }
 
   setUser(user: User) {
-    localStorage.setItem('user', JSON.stringify(user));
+    this.store.dispatch(UserActions.setUser({ user }));
+  }
+  
+  getUserInfo(): Observable<User> {
+    return this.store.pipe(select(selectUser));
   }
 
-  getUserInfoFromLocalStorage(): User {
-    const userInfo = localStorage.getItem('user');
-    return userInfo ? JSON.parse(userInfo) : null;
-  }
 }

@@ -11,7 +11,7 @@
       <a routerLink="/admin" routerLinkActive="active">Admin</a>
     </div>
 
-    <div class="user" *ngIf="user">
+    <div class="user" *ngIf="user$ | async as user">
       <a (click)="show()" class="username">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="23"
           viewBox="0 0 22 23">

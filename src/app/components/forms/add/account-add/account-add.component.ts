@@ -29,33 +29,43 @@ export class AccountAddComponent {
   
   onSubmit() {
     this.closeForm.emit();
-    if (this.accountForm.valid) {
-      console.log('Account data:', this.accountForm.value);
-      const user: User = this.userService.getUserInfoFromLocalStorage();
-      if (user && user.id) {
-        const account: Account = {
-          user: user, 
-          title: this.accountForm.value.title,
-          currency: this.accountForm.value.currency,
-          description: this.accountForm.value.description,
-          balance: this.accountForm.value.balance
-        };
-
-        this.accountService.addAccount(account).subscribe(
-          (newAccount: Account) => {
-            console.log('Account added successfully:', newAccount);
-            const currentAccounts = this.accountService.getAccounts().getValue(); 
-            this.accountService.updateAccounts([...currentAccounts, newAccount]);
-          },
-          (error) => {
-            console.error('Error adding account:', error);
-          }
-        );
-      } else {
-        console.error('User information not found.');
-      }
-    } else {
+    
+    if (!this.accountForm.valid) {
       console.log('Please fill in all fields.');
+      return;
     }
+    
+    console.log('Account data:', this.accountForm.value);
+    
+    this.userService.getUserInfo().subscribe(
+      (user) => {
+        if (user && user.id) {
+          const account: Account = {
+            user: user, 
+            title: this.accountForm.value.title,
+            currency: this.accountForm.value.currency,
+            description: this.accountForm.value.description,
+            balance: this.accountForm.value.balance
+          };
+  
+          this.accountService.addAccount(account).subscribe(
+            (newAccount: Account) => {
+              console.log('Account added successfully:', newAccount);
+              const currentAccounts = this.accountService.getAccounts().getValue(); 
+              this.accountService.updateAccounts([...currentAccounts, newAccount]);
+            },
+            (error) => {
+              console.error('Error adding account:', error);
+            }
+          );
+        } else {
+          console.error('User information not found.');
+        }
+      },
+      (error) => {
+        console.error('Error fetching user information:', error);
+      }
+    );
   }
+  
 }

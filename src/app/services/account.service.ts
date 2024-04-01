@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Account } from '../models/account.model';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, switchMap, tap, throwError } from 'rxjs';
 import { PiggyBank } from '../models/piggy-bank.model';
 import { Obligatory } from 'src/app/models/obligatory.model';
 import { Constants } from 'src/app/constants/constants';
@@ -20,16 +20,23 @@ export class AccountService {
   constructor(private http: HttpClient, private userService: UserService) {}
 
   getAccounts(): BehaviorSubject<Account[]> {
-    const user = this.userService.getUserInfoFromLocalStorage();
-    this.http.get<Account[]>(`${this.apiServerUrl}/user/accounts/${user.id}`)
-      .subscribe(
-        (accounts: Account[]) => {
-          this.updateAccounts(accounts);
-        },
-        (error) => {
-          console.error('Error fetching accounts:', error);
-        }
-      );
+    this.userService.getUserInfo().pipe(
+      switchMap(user =>
+        this.http.get<Account[]>(`${this.apiServerUrl}/user/accounts/${user.id}`)
+      ),
+      catchError(error => {
+        console.error('Error fetching accounts:', error);
+        return throwError(error);
+      })
+    ).subscribe(
+      (accounts: Account[]) => {
+        this.accountsSubject.next(accounts);
+      },
+      (error) => {
+        console.error('Error fetching accounts:', error);
+      }
+    );
+
     return this.accountsSubject;
   }
   
