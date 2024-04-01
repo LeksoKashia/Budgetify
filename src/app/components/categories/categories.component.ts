@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Category } from 'src/app/models/category.model';
 import { AccountService } from 'src/app/services/account.service';
 import { CategoryService } from 'src/app/services/category.service';
+import { switchMap, map } from 'rxjs/operators';
+import { TransactionCategoriesService } from 'src/app/services/transaction-categories.service';
+import { TransactionCategory } from 'src/app/models/transaction-category.model';
 
 @Component({
   selector: 'app-categories',
@@ -16,8 +19,9 @@ export class CategoriesComponent implements OnInit {
   searchTerm: string = '';
   currentTypeFilter: string = ''; 
   currentCategory: any;
+  transactionCategories : TransactionCategory[];
 
-  constructor(private accountService: AccountService, private categoryService: CategoryService) {}
+  constructor(private accountService: AccountService, private categoryService: CategoryService, private transactioCategroriesService: TransactionCategoriesService) {}
 
   ngOnInit(): void {
     this.getCategories();
@@ -32,7 +36,7 @@ export class CategoriesComponent implements OnInit {
     this.currentCategory = category;
   }
 
-  toggleOverlay12(cagtegory? :Category) {
+  toggleOverlay12() {
     this.showOverlay1 = !this.showOverlay1;
     this.getCategories();
   }
@@ -71,9 +75,37 @@ export class CategoriesComponent implements OnInit {
     this.filterCategories();
   }
 
-  deleteCategory(id: number) {
-    this.categoryService.deleteCategory(id).subscribe(
-      (response: any) => {
+  deleteCategory(category: Category) {
+    this.transactioCategroriesService.getTransactionCategories().subscribe(
+      (response: TransactionCategory[]) => {
+        this.transactionCategories = response;
+        console.log("damiloge", this.transactionCategories);
+        
+        const matchingIds: number[] = [];
+
+        this.transactionCategories.forEach((transactionCategory) => {
+          if (transactionCategory.name === category.name) {
+            matchingIds.push(transactionCategory.id);
+          }
+        });
+
+        console.log("Matching IDs:", matchingIds);
+
+        matchingIds.forEach(id => {
+          this.transactioCategroriesService.deleteTransactionCategory(id).subscribe(
+            () => {
+              console.log(`Successfully deleted transaction category with ID: ${id}`);
+            },
+            (error) => {
+              console.error(`Error occurred while deleting transaction category with ID: ${id}`, error);
+            }
+          );
+        });
+      }
+    );
+
+    this.categoryService.deleteCategory(category.id).subscribe(
+      () => {
         this.getCategories();
       },
       (error) => {
@@ -81,4 +113,5 @@ export class CategoriesComponent implements OnInit {
       }
     );
   }
+    
 }

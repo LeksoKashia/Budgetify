@@ -16,7 +16,7 @@
         <p>{{category.name}}</p>
         <div>
           <i class="fa-solid fa-pen" (click)="setCurrentCategory(category); toggleOverlay12()"></i>
-          <i class="fa-solid fa-trash" (click)="deleteCategory(category.id)"></i>
+          <i class="fa-solid fa-trash" (click)="deleteCategory(category)"></i>
         </div>
 
         <div *ngIf="showOverlay1" class="left-overlay" (click)="toggleOverlay12()"></div>
@@ -31,8 +31,6 @@
         </div>
       </div>
     </div>
-
-
 
   </div>
 
