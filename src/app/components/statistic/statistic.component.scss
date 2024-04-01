@@ -1,0 +1,48 @@
+.statistics-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: rgba(255, 255, 255, 1);
+  padding: 10px;
+  border-radius: 5px;
+}
+.statistics-thead{
+  background-color: #D5F1EC;
+  color: white;
+}
+th{
+  color: black;
+}
+
+.statistics-table th, .statistics-table td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid rgba(55, 55, 55, 0.5); 
+}
+
+.average-name, .total-name{
+  font-weight: bold;
+}
+
+.dates{
+  display: flex;
+  gap: 25px;
+}
+
+.date{
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+  align-items: center;
+}
+
+.date p{
+    margin: 0;
+}
+
+.date-input{
+  padding: 7px;
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(215, 217, 217);
+}
+

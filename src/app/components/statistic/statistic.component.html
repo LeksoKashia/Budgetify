@@ -1,0 +1,69 @@
+<app-header></app-header>
+<section style="display: flex; gap: 100px; padding: 0 35px 0 20px;">
+  <div class="accounts">
+    <app-accounts></app-accounts>
+  </div>
+
+  <div class="main">
+    <div class="dates">
+      <div class="date">
+        <p>Start date: </p>
+        <input type="date" id="startDate" class="date-input" [(ngModel)]="startDate" #startDateInput (ngModelChange)="endDateInput.value && logDates()">
+      </div>
+      <div class="date">
+        <p>End date: </p>
+        <input type="date" id="endDate" class="date-input" [(ngModel)]="endDate" #endDateInput (ngModelChange)="startDateInput.value && logDates()">
+      </div>
+    </div>
+
+    <table class="statistics-table">
+      <thead class="statistics-thead">
+        <tr>
+          <th>Month</th>
+          <th>Income</th>
+          <th>Expenses</th>
+          <th>Economy</th>
+          <th>% of Economy</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngIf="months.length > 0; else noRecordsMessage">
+          <tr *ngFor="let month of months">
+            <td>{{ month.name }}</td>
+            <td>{{ month.income }}</td>
+            <td>{{ month.expenses }}</td>
+            <td [ngStyle]="{'color': month.economy >= 0 ? 'green' : 'red'}">{{ month.economy }}</td>
+            <td [ngStyle]="{'color': month.economy >= 0 ? 'green' : 'red'}">
+              {{ month.economyInDollars.toFixed(2) }}%
+            </td>
+          </tr>
+          <tr>
+            <td class="average-name">Average</td>
+            <td>{{ averageIncome }}</td>
+            <td>{{ averageExpenses }}</td>
+            <td [ngStyle]="{'color': averageEconomy >= 0 ? 'green' : 'red'}">{{ averageEconomy }}</td>
+            <td [ngStyle]="{'color': averagePercentage >= 0 ? 'green' : 'red'}">{{ averagePercentage.toFixed(2) }}%</td>
+          </tr>
+          <tr>
+            <td class="total-name">Total</td>
+            <td>{{ totalIncome }}</td>
+            <td>{{ totalExpenses }}</td>
+            <td [ngStyle]="{'color': totalEconomy>= 0 ? 'green' : 'red'}">{{ totalEconomy }}</td>
+            <td [ngStyle]="{'color': totalPercentage >= 0 ? 'green' : 'red'}">{{ totalPercentage.toFixed(2) }}%</td>
+          </tr>
+
+        </ng-container>
+        <ng-template #noRecordsMessage>
+          <tr>
+            <td colspan="5">No records found. Please filter dates to see record statistics.</td>
+          </tr>
+        </ng-template>
+      </tbody>
+    </table>
+  </div>
+
+
+
+
+  <div class="user-actions"></div>
+</section>
