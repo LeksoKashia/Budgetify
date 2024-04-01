@@ -8,6 +8,8 @@ import { ImageService } from 'src/app/services/image.service';
 import { TransactionService } from 'src/app/services/transaction.service';
 import { Category } from 'src/app/models/category.model';
 import { AccountService } from 'src/app/services/account.service';
+import { TransactionCategory } from 'src/app/models/transaction-category.model';
+import { TransactionCategoriesService } from 'src/app/services/transaction-categories.service';
 
 
 @Component({
@@ -24,7 +26,6 @@ export class TransactionAddComponent implements OnInit{
   categories: Category[];
   selectedCategories: Category[] = [];
 
-
   @Output() closeForm = new EventEmitter<void>();
 
   transactionForm: FormGroup = this.formBuilder.group({
@@ -36,7 +37,7 @@ export class TransactionAddComponent implements OnInit{
     files: this.formBuilder.array([this.formBuilder.control(null)])
   });
 
-  constructor(private formBuilder: FormBuilder, private transactionService: TransactionService, private imageService: ImageService, private accountService: AccountService) { }
+  constructor(private formBuilder: FormBuilder, private transactionService: TransactionService, private imageService: ImageService, private accountService: AccountService, private TransactionCategoriesService: TransactionCategoriesService) { }
   ngOnInit(): void {
     this.getCategories();
   }
@@ -54,29 +55,46 @@ export class TransactionAddComponent implements OnInit{
   }
 
   onSubmit() {
+    console.log(this.selectedCategories);
     this.closeForm.emit();
     const activeCard: Account = JSON.parse(localStorage.getItem('activeCard'));
     const transaction: Transaction = {
       account: activeCard,
       type: this.type,
-      categories: "Work",
       ...this.transactionForm.value
     };
 
     this.transactionService.addTransaction(transaction)
     .subscribe(
       (transactionResponse: Transaction) => {
-        this.transactionForm.value.files.forEach((path: string) => {
-          const fileName = path.split(/[\\\/]/).pop();
-          const image: ImageModel = {
-            transaction: transactionResponse,
-            fileName: fileName,
-            filePath: path
-          }
+        if (this.transactionForm.value.files) {
+          this.transactionForm.value.files.forEach((path: string) => {
+            if (path) {
+              const fileName = path.split(/[\\\/]/).pop();
+              const image: ImageModel = {
+                transaction: transactionResponse,
+                fileName: fileName,
+                filePath: path
+              }
+  
+              this.imageService.addImage(image).subscribe();
+            }
+          });
+        }
+        console.log("kairaaad");
+      
 
-        this.imageService.addImage(image).subscribe();
+        this.selectedCategories.forEach(selectedCategory => {
+          const category: TransactionCategory = {
+              name: selectedCategory.name,
+              type: selectedCategory.type,
+              transaction: transactionResponse
+          };
+          console.log(category);
+          
+          this.TransactionCategoriesService.addTransactionCategories(category).subscribe();
       });
-    },
+      },
     (error) => {
       console.error('Error adding transaction:', error);
     }
@@ -114,33 +132,18 @@ export class TransactionAddComponent implements OnInit{
     });
   }
 
-  selectCategory(category: Category): void {
-    console.log('Selected Category:', category);
-    const index = this.selectedCategories.findIndex(c => c.id === category.id); 
+  onSelectionChange(event: any) {
+    console.log(event);
+  }
+
+  opa(category: Category) {
+    const index = this.selectedCategories.findIndex(cat => cat.id === category.id);
     if (index === -1) {
       this.selectedCategories.push(category);
     } else {
       this.selectedCategories.splice(index, 1);
     }
-  }
-
-  removeCategory(category: Category): void {
-    const categoryIndex = this.categories.findIndex(c => c.id === category.id);
-    if (categoryIndex !== -1) {
-      this.categories.splice(categoryIndex, 1);
-      const selectedIndex = this.selectedCategories.findIndex(c => c.id === category.id);
-      if (selectedIndex !== -1) {
-        this.selectedCategories.splice(selectedIndex, 1);
-      }
-    }
-  }
-
-  onSelectionChange(event: any) {
-    console.log(event);
-  }
-
-  opa(id: number){
-    console.log(id); 
+    console.log(this.selectedCategories);
   }
 
   

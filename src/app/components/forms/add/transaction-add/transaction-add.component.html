@@ -29,15 +29,21 @@
     </div>
 
     <div class="form-group">
-      <div class="container"
-        >
-        <mat-chip-listbox #chipList aria-label="Select categories" [multiple]="true"
-          (selectionChange)="onSelectionChange($event)">
-          <mat-chip-option *ngFor="let category of categories" [value]="category.id" (click)="opa(category.id)">
+      <label for="title" class="input-label">Categories:</label>
+      <div class="container">
+        <mat-chip-listbox #chipList aria-label="Select categories" [multiple]="true">
+          <mat-chip-option *ngFor="let category of categories" [value]="category" (click)="opa(category)">
             {{ category.name }}
           </mat-chip-option>
         </mat-chip-listbox>
       </div>
+    </div>
+    
+    <div *ngIf="selectedCategories.length > 0">
+      <p>Selected Categories:</p>
+      <ul>
+        <li *ngFor="let selectedCategory of selectedCategories">{{ selectedCategory.name }}</li>
+      </ul>
     </div>
 
 
