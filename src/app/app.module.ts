@@ -37,6 +37,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { CategoryAddComponent } from './components/forms/add/category-add/category-add.component';
 import { CategoryEditComponent } from './components/forms/edit/category-edit/category-edit.component';
+import { StatisticComponent } from './components/statistic/statistic.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { CategoryEditComponent } from './components/forms/edit/category-edit/cat
     TransactionAddComponent,
     CategoriesComponent,
     CategoryAddComponent,
-    CategoryEditComponent
+    CategoryEditComponent,
+    StatisticComponent
   ],
   imports: [
     RouterModule,
