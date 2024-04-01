@@ -38,6 +38,7 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { CategoryAddComponent } from './components/forms/add/category-add/category-add.component';
 import { CategoryEditComponent } from './components/forms/edit/category-edit/category-edit.component';
 import { StatisticComponent } from './components/statistic/statistic.component';
+import { accountReducer } from './redux/reducers/account.reducer';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import { StatisticComponent } from './components/statistic/statistic.component';
     HttpClientModule,
     StoreModule.forRoot({ 
       auth: authReducer,
-      user: userReducer
+      user: userReducer,
+      account: accountReducer
     }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     BrowserAnimationsModule

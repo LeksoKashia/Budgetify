@@ -6,6 +6,8 @@ import { AuthState } from '../redux/reducers/auth.reducer';
 import * as AuthActions from '../redux/actions/auth.actions';
 import { clearUser } from '../redux/actions/user.actions';
 import { Router } from '@angular/router';
+import * as AccountActions from 'src/app/redux/actions/account.actions';
+
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +22,7 @@ export class AuthService {
 
   logout() {
     this.store.dispatch(clearUser());
+    this.store.dispatch(AccountActions.clearActiveAccount());
     this.store.dispatch(AuthActions.logout());
     this.router.navigate(['/login']);
   }

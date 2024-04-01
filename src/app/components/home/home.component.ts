@@ -96,8 +96,6 @@ export class HomeComponent implements OnInit {
   }
 
   toggleInfo(transaction?: Transaction){
-    console.log("damiloge",this.categoriesArray);
-    
     this.showOverlay = !this.showOverlay;
     if (transaction) {
       this.currentTransaction = transaction;
